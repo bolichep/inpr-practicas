@@ -1,0 +1,26 @@
+/*
+Ejercicio 11
+~ Escribir un programa que ponga un arco iris, poniendo una bolita azul en la celda actual,
+una negra en la siguiente al este, una roja en la siguiente al este, y una verde en la siguiente
+al este (ver Figura 3), dejando el cabezal en la celda inicial. Probar su programa en los
+tableros del Ejercicio 1
+(a)
+(b)
+Figura 3: El Tablero (b) se obtiene al aplicar el programa para poner un arco iris sobre el
+Tablero (a).
+
+Proposito: dibujar un arcoiris (una bolita de cada color una en cada celda) 
+	hacia el este de la celda actual comenzando con una Azul en la actual,
+	una Negra en la siguiente al Este, una Roja en la siguiente al Este, 
+	terminando con una Verde en la siguiente al Este. Ademas posicionar 
+	el cabezal en la celda inicial
+Precondicion: Debe haber tres celdas al Este de la inicial
+*/
+program{
+	Poner(Azul); Mover(Este)
+	Poner(Negro); Mover(Este)
+	Poner(Rojo); Mover(Este)
+	Poner(Verde)
+	// Posiciono el cabezal en la celda inicial
+	Mover(Oeste);	Mover(Oeste);	Mover(Oeste) 
+}
