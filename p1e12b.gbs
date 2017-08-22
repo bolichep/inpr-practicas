@@ -1,0 +1,40 @@
+/*
+Escribir un programa por cada uno de los dibujos que se muestran en la Figura 4 2 , de forma
+tal que cuando el tablero inicial esta vacı́o y el cabezal se encuentra en el origen se obtengan
+dichos dibujos. Tener en cuenta que el cabezal debe terminar en la misma posición que donde
+se encuentra en la Figura 4. ¿El programa se puede ejecutar en tableros que no esten vacı́os?
+¿Cuál es su efecto final en dichos tableros? Justifique
+
+Proposito: Dibujar una cruz de bolitas color Azul cuyo centro tiene dos bolitas, su medida
+	es de cinco por cinco celdas, el cabezal descansa al finalizar en la celda central de la
+	cruz
+Precondicion: el tablero esta vacio y es de al menos cinco por cinco 
+	y el cabezal inicia en origen.
+
+*/
+program
+{
+	//Cabezal a la base de la cruz 
+	Mover(Este); Mover(Este)
+
+	//Dibuja raya vertical
+	Poner(Azul); Mover(Norte)
+	Poner(Azul); Mover(Norte)
+	Poner(Azul); Mover(Norte)
+	Poner(Azul); Mover(Norte)
+	Poner(Azul); 
+	
+	//Posiciona cabezal en extremo derecho de la cruz
+	Mover(Este); Mover(Este)
+	Mover(Sur); Mover(Sur)
+
+	//Dibuja raya horizontal
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); 
+
+	//LLeva el cabezal al centro de la cruz
+	Mover(Este); Mover(Este)
+}	

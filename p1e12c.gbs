@@ -1,0 +1,62 @@
+/*
+Escribir un programa por cada uno de los dibujos que se muestran en la Figura 4 2 , de forma
+tal que cuando el tablero inicial esta vacı́o y el cabezal se encuentra en el origen se obtengan
+dichos dibujos. Tener en cuenta que el cabezal debe terminar en la misma posición que donde
+se encuentra en la Figura 4. ¿El programa se puede ejecutar en tableros que no esten vacı́os?
+¿Cuál es su efecto final en dichos tableros? Justifique
+
+Proposito: Dibujar el perfil de un reloj de arena enfrentando dos triangulos en los que 
+	coincidiran los vertices y estaran formados por bolitas de color Azul. En el centro de
+	la forma, es decir, donde coiciden los dos vertices habra dos bolitas y es donde 
+	finalizara el cabezal. Ambos triangulos seran de cinco de base por tres de altura.
+
+Precondicion: el tablero cuenta con al menos cuatro celdas al Norte y con cuatro celdas al Este
+	del origen y el cabezal inicia en origen.
+
+*/
+program
+{
+	//Dibuja la primer recta horizontal en la fila cero
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+	
+	//Posiciona cabezal en el comienzo de la recta de la fila uno
+	Mover(Norte); Mover(Oeste)
+
+	//Dibuja la segunda recta en la fila uno 
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul);
+
+	//Posiciona cabezal en el vertice, fila dos
+	Mover(Norte); Mover(Este)
+
+	//Dibuja el vertice dos veces
+	Poner(Azul);	Poner(Azul);
+
+	//Se posiciona en la fila tres
+	Mover(Este); Mover(Norte)
+
+	//Dibuja la tercer  recta horizontal en la fila tres 
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul);
+
+	//Posiciona cabezal en el comienzo de la fila cuatro
+	 Mover(Oeste); Mover(Norte)
+
+	//Dibuja la ultima recta horizontal en la fila cuatro
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+
+	//Lleva el cabezal a su posicion final
+	Mover(Oeste); Mover(Sur)
+	Mover(Oeste); Mover(Sur)
+
+}	

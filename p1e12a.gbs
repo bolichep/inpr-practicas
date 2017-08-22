@@ -1,0 +1,38 @@
+/*
+Escribir un programa por cada uno de los dibujos que se muestran en la Figura 4 2 , de forma
+tal que cuando el tablero inicial esta vacı́o y el cabezal se encuentra en el origen se obtengan
+dichos dibujos. Tener en cuenta que el cabezal debe terminar en la misma posición que donde
+se encuentra en la Figura 4. ¿El programa se puede ejecutar en tableros que no esten vacı́os?
+¿Cuál es su efecto final en dichos tableros? Justifique
+
+Proposito: Dibujar un cuadrado de bolitas de color Azul de cuatro por cuatro, el cabezal
+	comienza en la celda origen y termina en la fila tres columna cero del cuadrado.
+Pecondicion: Debe haber al menos tres celdas al Norte y al Este desde la celda origen.
+*/
+program
+{
+	// Primer fila y posisionado en la siguiente
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Norte)
+	
+	// Segunda fila y posisionado en la siguiente
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Norte)
+
+	// Tercera fila y posisionado en la siguiente
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Norte)
+
+	// Cuarta fila y el cabezal descanza
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); 
+}
+

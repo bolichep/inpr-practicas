@@ -1,0 +1,40 @@
+/*
+Escribir un programa por cada uno de los dibujos que se muestran en la Figura 4 2 , de forma
+tal que cuando el tablero inicial esta vacı́o y el cabezal se encuentra en el origen se obtengan
+dichos dibujos. Tener en cuenta que el cabezal debe terminar en la misma posición que donde
+se encuentra en la Figura 4. ¿El programa se puede ejecutar en tableros que no esten vacı́os?
+¿Cuál es su efecto final en dichos tableros? Justifique
+
+Proposito: Dibujar tres rectas horizontales de bolitas de color Azul de largo tres en las
+	filas "pares" (empezando en la fila cero). La primer y tercera recta parten del borde 
+	isquierdo en cambio la segunda lo hace desde la columna cuatro relaiva al borde isquierdo.
+	El cabezal se encuentra al inicio en el origen y termina en la ultima celda de la tercera recta.
+Precondicion: el tablero cuenta con al menos cuatro celdas al Norte y con cuatro celdas al Este
+	del origen y el cabezal inicia en origen.
+
+*/
+program
+{
+	//Dibuja la primer recta horizontal en la fila cero
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+	
+	//Posiciona cabezal en el comienzo de la segunda recta
+	Mover(Este); Mover(Este)
+	Mover(Norte); Mover(Norte)
+
+	//Dibuja la segunda recta en la fila dos
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul);
+
+	//Posiciona cabezal en el comienzo de la tercera recta
+	Mover(Norte); Mover(Norte)
+	Mover(Oeste);	Mover(Oeste)
+
+	//Dibuja la tercer  recta horizontal en la fila cuatro
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+}	
