@@ -1,0 +1,24 @@
+/*
+Ejercicio 10
+Escribir un programa que saque un cuadrado de tamaño 3 con bolitas de color verde (saca
+una bolita por de cada celda), dejando el cabezal en la celda actual al finalizar (ver
+Figura 2).
+
+Proposito: Retirar un cuadrado de tres bolitas de color Verde de lado con el centro en la
+celda actual, finalizando el cabezal en la posicion de la celda actual. 
+Precondicion: Debe haber la distancia de una celda respecto a la celda actual en los 
+cuatros sentidos. Ademas debe preexistir un cuadrado de bolitas de color Verde centrado
+en la celda actual
+*/
+program{
+	Mover(Este); Sacar(Verde)
+	Mover(Norte); Sacar(Verde)
+	Mover(Oeste); Sacar(Verde)
+	Mover(Oeste); Sacar(Verde)
+	Mover(Sur); Sacar(Verde)
+	Mover(Sur); Sacar(Verde)
+	Mover(Este); Sacar(Verde)
+	Mover(Este); Sacar(Verde)
+	Mover(Norte); Sacar(Verde)
+	Mover(Oeste); Sacar(Verde)
+}

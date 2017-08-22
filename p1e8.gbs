@@ -1,0 +1,16 @@
+/*
+Ejercicio 8: Escribir un programa que reemplace 1 una bolita roja con otra verde, haciendo uso de los
+comandos Sacar y Poner. Probar su programa con cada uno de los tableros del Ejercicio 1,
+indicando si el efecto es el esperado.
+Proposito: Reemplazar una bolita Rojo con orta Verde
+Precondicion: Debe existir una bolita color Rojo en la celda actual.
+*/
+
+program{
+	Sacar(Rojo)
+	Poner(Verde)
+}
+
+/*
+R: En todos los casos en que no habia alguna bolita Rojo en la celda actual el programam fallo.
+*/

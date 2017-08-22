@@ -1,0 +1,29 @@
+/*
+~ Escribir el programa que ponga un cuadrado de tamaño 3 con bolitas de color verde,
+con centro en la celda actual, dejando el cabezal en la celda actual al finalizar (ver
+Figura 2). Ejecutar el programa con cada uno de los tableros del ejercicio 1. ¿Qué ocurre si
+el tablero ya tenı́a bolitas verdes? ¿Es esto un problema, o el efecto obtenido es acorde al
+propósito? Justifique.
+(a)
+(b)
+Figura 2: Efectos de poner y sacar un cuadrado verde. Empezando con el Tablero (a), el
+programa que pone termina en el Tablero (b), mientras que empezando con el Tablero (b) se
+obtiene el Tablero (a) al sacar.
+
+Proposito: Dibujar un cuadrado de tres bolitas de color Verde de lado con el centro en la
+celda actual, finalizando el cabezal en la posicion de la celda actual. 
+Precondicion: Debe haber la distancia de una celda respercto a la celda actual en los 
+cuatros sentidos.
+*/
+program{
+	Mover(Este); Poner(Verde)
+	Mover(Norte); Poner(Verde)
+	Mover(Oeste); Poner(Verde)
+	Mover(Oeste); Poner(Verde)
+	Mover(Sur); Poner(Verde)
+	Mover(Sur); Poner(Verde)
+	Mover(Este); Poner(Verde)
+	Mover(Este); Poner(Verde)
+	Mover(Norte); Poner(Verde)
+	Mover(Oeste); Poner(Verde)
+}
