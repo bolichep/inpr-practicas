@@ -1,0 +1,23 @@
+/*
+~ Los siguientes programas resuelven incorrectamente el ejercicio anterior. ¿Por qué? Com-
+parar con su solución del ejercicio anterior. (~ Escribir un programa que ponga una bolita de color azul en la celda lindante al Norte de la
+actual, dejando el cabezal en la celda inicial. Ejecutar el programa en todos los tableros
+del Ejercicio 1, indicando el resultado obtenido.)
+program {
+Mover(Norte);
+Poner(Azul);
+}
+
+program {
+Poner(Azul);
+Mover(Este);
+Mover(Oeste);
+}
+
+
+R:
+En el primer caso, no se devuelve el cabezal a la celda inicial.
+El segundo caso en cambio coloca la bolita al en la celda inicial
+y deja, si, el cabezal en la celda iicial.
+
+*/
