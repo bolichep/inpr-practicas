@@ -23,7 +23,7 @@ program{
 	Mover(Sur); Poner(Verde)
 	Mover(Sur); Poner(Verde)
 	Mover(Este); Poner(Verde)
-	Mover(Este); Poner(Verde)
-	Mover(Norte); Poner(Verde)
-	Mover(Oeste); Poner(Verde)
+	Mover(Este); Poner(Verde) // Periferia completada
+	Mover(Norte)
+	Mover(Oeste); Poner(Verde) //bolita central celda "inicial"
 }

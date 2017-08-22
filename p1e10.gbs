@@ -19,6 +19,6 @@ program{
 	Mover(Sur); Sacar(Verde)
 	Mover(Este); Sacar(Verde)
 	Mover(Este); Sacar(Verde)
-	Mover(Norte); Sacar(Verde)
+	Mover(Norte)
 	Mover(Oeste); Sacar(Verde)
 }

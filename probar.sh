@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in {1..9}
+for i in {0..9}
 do 
 	echo "vvvvvvvvvvvvvvvvvvvvvvvv Tablero$i"
         pygobstones-lang tablero$i.gbb
