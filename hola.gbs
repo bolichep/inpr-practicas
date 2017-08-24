@@ -1,0 +1,107 @@
+/* programa que escriba hola con bolitas rojas como lo indica el dibujo */
+
+procedure DibujarTresPuntos(direccion){
+	/* prop: Poner tres bolitasa Rojas en linea en tres celdas comenzando en la actual
+		y en direccion <direccion> 
+		Precondicion: debe haber dos celdas en la direccion <direccion> 
+		desde la celda actual */
+		*/
+	Poner(Rojo); Mover(direccion)
+	Poner(Rojo); Mover(direccion)
+	Poner(Rojo)
+	}
+
+procedure DibujarDosPuntos(direccion){
+	/* Poposito: Poner dos bolitas Rojas en linea separadas por una celda 
+		en direccion <direccion>
+		Precondicion: debe haber dos celdas en la direccion <direccion> 
+		desde la celda actual */
+	Poner(Rojo); Mover(direccion)
+	Mover(direccion)
+	Poner(Rojo)
+	}
+
+procedure DibujarUnPunto(direccion){
+	/* Proposito: Pone una bolita en medio de dos celdas moviendo el cabezal
+		en direccion <direccion>
+		Precondicion: debe haber dos celdas en la direccion <direccion> 
+		desde la celda actual */
+	Mover(direccion)
+	Poner(Rojo)
+	Mover(direccion)
+	}
+
+procedure CambiarDeLinea(direccion){
+	/* Proposito: mover el cabezal a la proxima linea en direccion <direccion>
+		Precondicion: debe haber una celda lindante a la actual 
+		en direccion <direccion>
+		*/
+	Mover(direccion)
+	}
+
+procedure IrProximaLetra(){
+	/* Proposito: mover el cabezal desde la celda final usada por la letra
+	anterior hasta la celdad de inicio de la proxima letra
+	Prerequisito: Debe haber dos celdas hacia el Norte de la celda actual
+	y dos celdas al Este de la celda actual */
+	Mover(Este); Mover(Norte); Mover(Norte); Mover(Este)
+	}
+
+procedure VolverEnLaLinea(){
+	/* Proposito: Volver dos celdas hacia el Oeste 
+	Precondicion: Debe haber desde la celda actua 
+	dos celdas al Oeste
+	*/
+	Mover(Oeste); Mover(Oeste)
+	}
+
+procedure DibujarHache(){
+	/* prop: dib letra H
+	prec: dos celdas al este y dos al Sur desde la celda actual
+	*/
+	DibujarDosPuntos(Este);  VolverEnLaLinea(); CambiarDeLinea()
+	DibujarTresPuntos(Este); VolverEnLaLinea(); CambiarDeLinea()
+	DibujarDosPuntos(Este) ; 
+}
+
+procedure DibujarO(){
+	/* prop dib letra O
+	prec: dos celdas lindantes al Sur y al Este de la actual 
+	*/
+	DibujarUnPunto(Este);  VolverEnLaLinea(); CambiarDeLinea()
+	DibujarDosPuntos(Este);  VolverEnLaLinea(); CambiarDeLinea()
+	DibujarUnPunto(Este);
+}
+
+procedure DibujarEle(){
+	/* prop dib letra L
+	prec: dos celdas lindantes al Sur y al Este de la actual 
+	*/
+	DibujarTresPuntos(Sur); 
+	Sacar(Rojo) /* ACA HAy un Problema*/
+	DibujarTresPuntos(Este); 
+	}
+	
+procedure DibujarA()
+	/* prop: Dibujar la letra A con puntos en un cuadrado de tres por lado
+	prec: dos celdas lindantes al Sur y al Este de la actual
+	*/	
+	DibujarUnPunto(Este); VolverEnLaLinea(); CambiarDeLinea()
+	DibujarTresPuntos(Este); VolverEnLaLinea(); CambiarDeLinea()
+	DibujarDosPuntos(Este)
+	}
+
+program
+{
+	/* Proposito: Escribir HOLA con bolitas (puntos)
+	precondicion: el cabezal en la celda N.O. de un rectangulo de tres celdas 
+	altura y quince celdas de ancho */
+	DibujarLetraHache()
+	IrProximaLetra()
+	DibujarLetraO()
+	IrProximaLetra()
+	DibujarLetraEle()
+	IrProximaLetra()
+	DibujarLetraA()
+	}
+
