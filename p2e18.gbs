@@ -1,0 +1,38 @@
+/* Escriba un programa que construya una pared de ladrillos de tres ladrillos de alto por cinco ladrillos de ancho. Una pared de ladrillos está compuesta por hileras de ladrillos pegadas entre sı́ con cemento. Para la realización de este ejercicio se cuenta con los procedimientos PonerLadrillo y PonerCemento, los cuales cuentan con las siguientes precondiciones ypropósitos:
+*/
+/* Propósito : Pone un ladrillo en la hilera de ladrillos .
+Precondición : Debe haber cemento en la celda . */
+procedure PonerLadrillo(){
+	Poner(Rojo)
+}
+
+/* Propósito : Pone cemento en una celda .
+Precondición : La celda en la que se pone cemento debe estar vacı́a . */
+procedure PonerCemento(){
+	Poner(Negro)	
+}
+
+/* Proposito: armar una hilera de ladrillos.
+Precondicion: deben haber dos celdas al Norte de la actual */
+procedure ArmarHilera(){
+	repeat(2){
+		PonerCemento(); PonerLadrillo(); Mover(Norte)
+	}
+	PonerCemento(); PonerLadrillo()
+	Mover(Sur); Mover(Sur)
+}	
+
+/* Proposito: Armar una pared de ladrillos de tres por cinco 
+Precondicion: deben haber cinco celdas Este y tres al Norte */
+procedure ArmarPared(){
+	repeat(4){
+		ArmarHilera(); Mover(Este)
+	}
+	ArmarHilera(); 
+}
+
+program{
+/* Proposito: Armar una pared de tres de alto por cinco de ancho
+	Precondicion: El Tablero debe ser de al menos tres celdas de alto y cinco celdas de ancho */
+	ArmarPared()
+}
