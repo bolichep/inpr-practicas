@@ -33,6 +33,7 @@ procedure ArmarPared(){
 
 program{
 /* Proposito: Armar una pared de tres de alto por cinco de ancho
-	Precondicion: El Tablero debe ser de al menos tres celdas de alto y cinco celdas de ancho */
+	Precondicion: El Tablero debe ser de al menos tres celdas de alto y cinco celdas de ancho 
+	el cabezal debe inicilamente estar situado en la esquina SO */
 	ArmarPared()
 }
