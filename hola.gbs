@@ -5,7 +5,6 @@ procedure DibujarTresPuntos(direccion){
 		y en direccion <direccion> 
 		Precondicion: debe haber dos celdas en la direccion <direccion> 
 		desde la celda actual */
-		*/
 	Poner(Rojo); Mover(direccion)
 	Poner(Rojo); Mover(direccion)
 	Poner(Rojo)
@@ -31,12 +30,12 @@ procedure DibujarUnPunto(direccion){
 	Mover(direccion)
 	}
 
-procedure CambiarDeLinea(direccion){
+procedure CambiarDeLinea(){
 	/* Proposito: mover el cabezal a la proxima linea en direccion <direccion>
 		Precondicion: debe haber una celda lindante a la actual 
-		en direccion <direccion>
+		en direccion Sur
 		*/
-	Mover(direccion)
+	Mover(Sur)
 	}
 
 procedure IrProximaLetra(){
@@ -55,7 +54,7 @@ procedure VolverEnLaLinea(){
 	Mover(Oeste); Mover(Oeste)
 	}
 
-procedure DibujarHache(){
+procedure DibujarLetraHache(){
 	/* prop: dib letra H
 	prec: dos celdas al este y dos al Sur desde la celda actual
 	*/
@@ -64,7 +63,7 @@ procedure DibujarHache(){
 	DibujarDosPuntos(Este) ; 
 }
 
-procedure DibujarO(){
+procedure DibujarLetraO(){
 	/* prop dib letra O
 	prec: dos celdas lindantes al Sur y al Este de la actual 
 	*/
@@ -73,7 +72,7 @@ procedure DibujarO(){
 	DibujarUnPunto(Este);
 }
 
-procedure DibujarEle(){
+procedure DibujarLetraEle(){
 	/* prop dib letra L
 	prec: dos celdas lindantes al Sur y al Este de la actual 
 	*/
@@ -82,7 +81,7 @@ procedure DibujarEle(){
 	DibujarTresPuntos(Este); 
 	}
 	
-procedure DibujarA()
+procedure DibujarLetraA(){
 	/* prop: Dibujar la letra A con puntos en un cuadrado de tres por lado
 	prec: dos celdas lindantes al Sur y al Este de la actual
 	*/	
