@@ -1,0 +1,58 @@
+/* Proposito : Dibuja la base de la piramide
+Precondicion : Debe haber cinco celdas vacias al este del cabezal . */
+procedure DibujarBase() { 
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+}
+/* Proposito : Dibuja el medio de la piramide
+Precondicion : Debe haber cuatro celdas vacias al este del cabezal . */
+procedure DibujarMedio() { 
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); Mover(Oeste)
+	Poner(Azul); 
+  }
+
+/* Proposito : Dibuja la punta de la piramide .
+Precondicion : Debe haber tres celdas vacias al este del cabezal */
+procedure DibujarPunta() { 
+	Poner(Azul); Mover(Este)
+	Poner(Azul); 
+} 
+
+
+
+/*
+Proposito: Dibujar una piramide de seis de base por tres de alto 
+Precondicion: el tablero cuenta con al menos tres celdas al Norte y con seis celdas al Este
+	del origen y el cabezal inicia en origen.
+*/
+procedure DibujarPiramide()
+{
+	//Dibuja la base
+	DibujarBase()
+	
+	//Posiciona cabezal en el comienzo de la recta del medio
+	Mover(Norte); Mover(Oeste)
+
+	//Dibuja la  fila del medio
+	DibujarMedio()
+	Mover(Norte); Mover(Este)
+
+	//Dibuja Punta
+	DibujarPunta()
+}	
+/*
+Proposito: Dibujar una piramide de seis de base por tres de alto 
+
+Precondicion: el tablero cuenta con al menos tres celdas al Norte y con seis celdas al Este
+	del origen y el cabezal inicia en origen.
+
+*/
+program {
+	DibujarPiramide()
+}
