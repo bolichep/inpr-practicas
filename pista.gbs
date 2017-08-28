@@ -1,10 +1,11 @@
 procedure PonerTramoCorto(color, dir){
-/* P: una bolita */
+/* Proposito: dibujar una bolita de color "color" 
+Precondicion: una celda a en la direccion "dir" desde la actual */
 	Poner(color); Mover(dir)
 }
 
 procedure PonerTramoMedio(color,dir){
-/* P: dos bolitas */
+/* Proposito: dos bolitas */
 	PonerTramoCorto(color,dir)
 	PonerTramoCorto(color,dir)
 }
