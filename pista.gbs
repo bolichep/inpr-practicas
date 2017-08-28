@@ -1,0 +1,46 @@
+procedure PonerTramoCorto(color, dir){
+/* P: una bolita */
+	Poner(color); Mover(dir)
+}
+
+procedure PonerTramoMedio(color,dir){
+/* P: dos bolitas */
+	PonerTramoCorto(color,dir)
+	PonerTramoCorto(color,dir)
+}
+procedure PonerTramoLargo(color,dir){
+/* P: cuatro bolitas */
+	PonerTramoMedio(color,dir)
+	PonerTramoMedio(color,dir)
+}
+procedure PonerCurva(color,dir1, dir2){
+/* Proposito: Dibujar un codo o Curva desde dir1 a dir2
+   Precondicion: Debe haber al menos una celda en direccion "dir1" desde la actual 
+		 y dos celdas en dir2 desde la actual */
+	PonerTramoCorto(color,dir1)
+	PonerTramoCorto(color,dir2)
+	PonerTramoCorto(color,dir2)
+}
+procedure PonerMeta(color,dir){
+/* Proposito: poner dos bolitas azul que simbolizan la meta */
+	Poner(color); Poner(color); Mover(dir)
+}
+
+procedure ArmarPista() {
+/* Proposito: armar una pista 
+ Precondicion: debe haber x celdas al Este de la actual y x celdas al Norte de la actual */
+	Mover(Norte); Mover(Este)
+	PonerMeta(Azul,Norte)
+	PonerTramoLargo(Negro, Norte)
+	PonerCurva(Negro, Norte, Este)
+	PonerCurva(Negro, Este, Sur)
+	PonerTramoLargo(Negro, Sur)
+	PonerCurva(Negro, Sur, Oeste)
+	PonerCurva(Negro, Oeste, Norte)
+
+}
+program{
+/* Proposito: Dibujar Pista*/
+	ArmarPista()
+
+}
