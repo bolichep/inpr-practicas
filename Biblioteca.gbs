@@ -1,0 +1,6 @@
+--  JCFS Biblioteca
+procedure PonerN(color, veces){
+  repeat(veces){
+		Poner(color);
+	}
+}
