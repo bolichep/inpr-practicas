@@ -1,6 +1,21 @@
 --  JCFS Biblioteca
-procedure PonerN(color, veces){
+procedure PonerN(veces, color){
+/* Proposito:: Colocar "veces" bolitas de color "color" en la celda actual. */
   repeat(veces){
 		Poner(color);
 	}
 }
+
+procedure SacarN(veces, color){
+/* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. 
+   Precondicion: Debe haber "veces" bolitas color "color" en la celda actual */
+  repeat(veces){
+		Sacar(color);
+	}
+}
+
+procedure SacarTodas(color){
+	/* Saca todas las bolitas de color "color" de la celda actual */
+	SacarN(nroBolitas(color), color)	
+}
+
