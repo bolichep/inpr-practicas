@@ -6,6 +6,15 @@ procedure PonerN(veces, color){
 	}
 }
 
+procedure PonerNAl(color, dir, numero){
+	/* Pone "numero" bolitas de color "color" en la celda lindante en direccion "dir" dejando el cabezal en la celda actual */
+	Mover(dir)
+	repeat(numero){
+		Poner(color)
+	}
+	Mover(opuesto(dir))
+}
+
 procedure SacarN(veces, color){
 /* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. 
    Precondicion: Debe haber "veces" bolitas color "color" en la celda actual */
@@ -19,3 +28,18 @@ procedure SacarTodas(color){
 	SacarN(nroBolitas(color), color)	
 }
 
+procedure LineaNAl(color, numero, direccion){
+	repeat(numero){
+		Mover(direccion)
+		Poner(color)
+	}
+}	
+
+procedure CopiarBolitasCAl(color, dir){
+/* Proposito: copia las bolitas de color "color" a la celda lindante en direccion "dir". El cabezal queda en la celda actual */  
+	repeat(nroBolitas(color)){
+		Mover(dir)
+		Poner(color)
+		Mover(opuesto(dir))
+	}
+}

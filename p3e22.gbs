@@ -1,0 +1,24 @@
+/* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
+ Precondicion: Una celda en direccion "dir" 
+	El cabezal termina en la celda actual */
+procedure CopiarCeldaAl(dir){
+	foreach color in [minColor()..maxColor()]{
+		PonerNAl(color, dir, nroBolitas(color))
+	}
+}
+
+/* Proposito: Copiar la celda actual a las ocho celdas adyacentes.
+	Precondicion: Debe haber una celda lindante en las cuatro 
+	direcciones a la actual. El cabezal quda en la celda actual */
+procedure CopiarCeldaAAdyacentes(){
+	foreach dir in [minDir()..maxDir()]{
+			CopiarCeldaAl(dir)
+			Mover(dir)
+			CopiarCeldaAl(siguiente(dir))
+			Mover(opuesto(dir))
+		}
+}
+/* Proposito: Copiar la celda actual en las ocho celdas adyacentes*/ 
+program {	
+	CopiarCeldaAAdyacentes()
+}

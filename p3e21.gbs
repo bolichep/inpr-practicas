@@ -1,0 +1,20 @@
+/* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
+ Precondicion: Una celda en direccion "dir" */
+procedure CopiarCeldaAl(dir){
+	foreach color in [minColor()..maxColor()]{
+		PonerNAl(color, dir, nroBolitas(color))
+	}
+}
+
+procedure CopiarCeldaALindantes(){
+	foreach dir in [minDir()..maxDir()]{
+		CopiarCeldaAl(dir)
+		}
+}
+/* */ 
+program {	
+	Mover(Este)
+	CopiarCeldaAl(Norte)
+	Mover(Norte)
+	CopiarCeldaALindantes()
+}

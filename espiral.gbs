@@ -1,0 +1,19 @@
+procedure VueltaColor1SegunColor2(color, colorsegun){
+/* Dibujar Vuelta en espiral de cuatro tramos de largo segun la cantidad de bolitas color "color2"
+	La vuelta comenzara hacia el minDir() (Norte) pasando por los cardinales hasta el maxDir() */
+	foreach dir in [minDir()..maxDir()]{
+		LineaNAl(color, nroBolitas(colorsegun), dir)
+	}
+}
+procedure EspiralCuatricolorSegun(){
+/* Proposito: Dibujar un espiral de cuatro vueltas y tramos tan largos como bolitas "color2" en la celda actual
+  prerequisito: el tablero debe estar armado para que nada se rompa */
+	foreach color in [minColor()..maxColor()]{
+		VueltaColor1SegunColor2(color, siguiente(color))
+	}
+}
+
+			
+program{
+	EspiralCuatricolorSegun()
+}
