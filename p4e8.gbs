@@ -1,0 +1,9 @@
+procedure Desempatar(){
+	if ( (nroBolitas(Azul) == nroBolitas(Negro)) && 	(nroBolitas(Azul) == nroBolitas(Rojo)) && (nroBolitas(Azul) == nroBolitas(Verde)) ) {
+		Poner(Azul)
+	}
+}
+
+program{
+	Desempatar()
+}

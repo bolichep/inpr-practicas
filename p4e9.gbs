@@ -1,0 +1,17 @@
+/*Escribir un procedimiento PonerOSacarAcorde(c, acorde) que, dados dos colores c y acor-
+de, se comporte de la siguiente forma: si hay una bolita de color acorde, entonces el procedi-
+miento pone una bolita de color c; caso contrario, el procedimiento saca una bolita de color
+c. Discutir la precondición del procedimiento.*/
+/* Pone una bolita de color "c" si encuentra una bolita de color "acorde", en caso contrario saca una bolita de color "c".
+Debe haber una bolita de color "c" en caso de que exista una bolita de color "acorde" */
+procedure PonerOSacarAcorde(c, acorde){
+	if (hayBolitas(acorde)){
+		Poner(c);
+	}else{
+		Sacar(c)
+	}
+}
+
+program{
+	PonerOSacarAcorde(Rojo, Negro)
+}

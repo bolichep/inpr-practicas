@@ -1,0 +1,10 @@
+procedure SacarSiHay(c){
+	if (hayBolitas(c)){
+		Sacar(c)
+	}
+}
+
+program {
+	SacarSiHay(Rojo)
+}
+

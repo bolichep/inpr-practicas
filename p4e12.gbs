@@ -1,0 +1,7 @@
+/*Escribir un procedimiento PonerSi que dado un color c y un booleano b, ponga una bolita
+de color c en la celda actual si b es True, y no haga nada si este es False.*/
+procedure PonerSi(color, b){
+	if (b){
+		Poner(color)
+	}
+}

@@ -1,0 +1,14 @@
+procedure AlMenosUnaDeCada(){
+	foreach color in [minColor()..maxColor()]{
+		if (not hayBolitas(color)){
+			Poner(color)
+		}
+	}
+}
+/* Bien armado */ 
+procedure AlMenosUnaDeCada(){
+	foreach color in [minColor()..maxColor()]{
+		PonerSi(color, not hayBolitas())
+	}
+}
+

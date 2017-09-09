@@ -6,7 +6,7 @@ procedure PonerN(veces, color){
 	}
 }
 
-procedure PonerNAl(color, dir, numero){
+procedure PonerNAl(color, numero, dir){
 	/* Pone "numero" bolitas de color "color" en la celda lindante en direccion "dir" dejando el cabezal en la celda actual */
 	Mover(dir)
 	repeat(numero){
@@ -15,11 +15,41 @@ procedure PonerNAl(color, dir, numero){
 	Mover(opuesto(dir))
 }
 
-procedure SacarN(veces, color){
+procedure PonerSi(color, b){
+/* Dado un color c y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False.*/
+	if (b){
+		Poner(color)
+	}
+}
+
+procedure SacarN(color, veces){
 /* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. 
    Precondicion: Debe haber "veces" bolitas color "color" en la celda actual */
   repeat(veces){
 		Sacar(color);
+	}
+}
+
+procedure SacarSi(color, condicion){
+	/* Saca una bolita de color "color" si se cumple la condicion "condicion".
+	Debe haber una bolita de color "color". */
+	if (condicion){
+		Sacar(color)
+	}
+}
+
+procedure MoverN(direccion, numero){
+	/* Mueve el cabezal "numero" celdas al "direccion". 
+   Deben haber "numero" celdas en direccion "direccion" */
+	repeat(numero){
+		Mover(direccion)
+	}
+}
+
+procedure MoverSi(direccion, condicion){
+	/* Mueve el cabezal si se cumple la condicion "condicion" */
+	if (condicion){
+		Mover(direccion)
 	}
 }
 
@@ -41,5 +71,13 @@ procedure CopiarBolitasCAl(color, dir){
 		Mover(dir)
 		Poner(color)
 		Mover(opuesto(dir))
+	}
+}
+
+/* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
+ Precondicion: Una celda en direccion "dir" */
+procedure CopiarCeldaAl(dir){
+	foreach color in [minColor()..maxColor()]{
+		PonerNAl(color, dir, nroBolitas(color))
 	}
 }
