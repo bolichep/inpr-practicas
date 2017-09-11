@@ -16,7 +16,7 @@ procedure PonerNAl(color, numero, dir){
 }
 
 procedure PonerSi(color, b){
-/* Dado un color c y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False.*/
+/* Dado un color "color" y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False.*/
 	if (b){
 		Poner(color)
 	}
@@ -55,7 +55,7 @@ procedure MoverSi(direccion, condicion){
 
 procedure SacarTodas(color){
 	/* Saca todas las bolitas de color "color" de la celda actual */
-	SacarN(nroBolitas(color), color)	
+	SacarN(color, nroBolitas(color))	
 }
 
 procedure LineaNAl(color, numero, direccion){
