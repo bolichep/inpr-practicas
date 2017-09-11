@@ -1,0 +1,28 @@
+/* */
+function vacia(){
+	return (not hayBolitas())
+}
+
+function conBolitas(){
+	return (not vacia())
+}
+
+function conBolitasAl(d){
+	Mover(d)
+	return (conBolitas())
+}
+
+function lindanteConBolitas(d){
+	return (puedeMover(d) && conBolitasAl(d))
+}
+
+function lindanteConBolitas(){
+		return ( lindanteConBolitas(Norte) && lindanteConBolitas(Este) && lindanteConBolitas(Sur) && lindanteConBolitas(Oeste) )
+}
+
+function enCruz() {
+	return ( conBolitas() && lindanteConBolitas())
+}
+
+function enCruzAl(){
+	return ( 
