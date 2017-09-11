@@ -1,0 +1,26 @@
+/* Escribir DejarColorMinimo() para cada color c saque todas las bolitas de color c si la celda actual tien las bolitas tiene las bolitas de color mas chico que c. */
+
+
+/* Quitar Todas las bolitas de todos los colores desde "color" en adelante */
+procedure QuitarTodasDesdeC(color){
+	foreach c in [color..maxColor()]{
+			SacarTodas(c)
+	}
+}
+
+/* Dejar solo las bolitas de color minimo. Sacar todad las mayores a color minimo */ 
+procedure DejarColorMinimo(){
+	foreach color in [minColor()..maxColor()]{
+		if (hayBolitas(color)){
+			QuitarTodasDesdeC(siguiente(color))
+		}
+	}
+}
+
+program{
+	repeat(7){
+		DejarColorMinimo()
+		Mover(Este)
+		}
+	DejarColorMinimo()
+}

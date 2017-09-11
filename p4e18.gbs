@@ -1,0 +1,13 @@
+/* DegradarCuadrado(n, deg, c) por celda si hay mas deg bolitas de color c saca deg bolitas de color c caso contrario saca TODAS las bolitas de color c */
+
+/* Quita deg cantidad de bolitas si hay mas de deg si no saca todas */
+procedure DegradarCelda(n, deg, c){
+	if (nroBolitas(c) > deg){
+		SacarN(c, deg)
+	} else {
+		SacarTodas(c)
+	}
+}
+
+/* degrada linea de largo n
+procedure DegradarLinea(n){
