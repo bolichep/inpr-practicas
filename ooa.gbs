@@ -1,8 +1,11 @@
 /* Hola */
 procedure Hola(){
-	las que los paraio
+	Mover(Norte)
 }
+function sigue(d){
+	return(siguiente(d))
+}
+
 program{
-	kkdjf
-	dkfkdfj
+	return (siguiente(siguiente(Norte)))
 }
