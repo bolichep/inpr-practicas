@@ -1,7 +1,7 @@
 /* DegradarCuadrado(n, deg, c) por celda si hay mas deg bolitas de color c saca deg bolitas de color c caso contrario saca TODAS las bolitas de color c */
 
-/* Quita deg cantidad de bolitas si hay mas de deg si no saca todas */
-procedure DegradarCelda(n, deg, c){
+/* Quita "deg" cantidad de bolitas de color "c" si hay mas de "deg" de bolitas de color "c",  si no saca todas las de este color */
+procedure DegradarCelda(deg, c){
 	if (nroBolitas(c) > deg){
 		SacarN(c, deg)
 	} else {
@@ -9,5 +9,27 @@ procedure DegradarCelda(n, deg, c){
 	}
 }
 
-/* degrada linea de largo n
-procedure DegradarLinea(n){
+/* Degrada linea de largo n . El cabezal parte de la celda Oeste de la linea, por esto deben haber "n" celdas al Este de la celda de partida. */
+procedure DegradarLinea(n, deg, c){
+	repeat(n-1){
+		DegradarCelda(deg, c)
+		Mover(Este)
+	}
+	DegradarCelda(deg, c)
+	MoverN(Oeste, n-1)
+}
+
+/* Degrada cuadrado de "n" de lado. El cabezal debe partir de la celda Sur-Oeste del cuadrado, por tanto deben haber "n" celdas en direcion Norte y en direccion Este respecto de la celda de partida. */ 
+procedure DegradarCuadrado(n, deg, c){
+	repeat(n-1){
+		DegradarLinea(n, deg, c)
+		Mover(Norte)
+	}
+	DegradarLinea(n, deg, c)
+}
+
+/* Degrada un cuadrado de "n" de lado. Degradar significa, en cada celda si hay mas bolitas que el numero "deg" de un color "c" se sacan "deg" bolitas del mismo color, en caso contrario se quitan todas las bolitas de ese mismo color "c". */
+program{
+	DegradarCuadrado(3, 2, Azul)
+}
+
