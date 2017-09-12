@@ -24,5 +24,26 @@ function enCruz() {
 	return ( conBolitas() && lindanteConBolitas())
 }
 
-function enCruzAl(){
-	return ( 
+function enCruzAl(d){
+	Mover(d)
+	return (enCruz())
+}
+
+function enCruzDiag(d){
+	Mover(d)
+	return (enCruzAl(siguiente(d))
+}
+
+function lindanteEnCruz(d){
+	return (puedeMover(d) && enCruzAl(d))
+}
+
+function diagonalEnCruz(d){
+	return (puedeMover(d) && enCruzDiag(d))
+}
+
+function explosion(){
+	return (lindanteEnCruz(Norte) && diagonalEnCruz(Norte) && lindanteEnCruz(Este) && diagonalEnCruz(Este) && lindanteEnCruz(Sur) && diagonalEnCruz(Sur) && lindanteEnCruz(Oeste) && diagonalEnCruz(Oeste))
+}
+
+
