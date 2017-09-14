@@ -1,0 +1,32 @@
+procedure PintaColumna(color){
+	while (puedeMover(Norte)){
+		Poner(Azul)
+		Mover(Norte)
+	}
+	Poner(Rojo)
+	while (puedeMover(Sur)){
+		Mover(Sur)
+	}
+}	
+
+function llegoALaUltimaFila() {
+	return (not puedeMover(Este))
+}
+
+procedure CabezalALaPrimeraFila(){
+	while(puedeMover(Oeste) ) { Mover(Oeste) }
+	while(puedeMover(Sur) ) { Mover(Sur) }
+}
+
+program{
+	PintarTableroPorColumnas(Azul)
+}
+
+procedure PintarTableroPorColumnas(color){
+	CabezalALaPrimeraFila()
+	while (not llegoALaUltimaFila()) {
+		PintaColumna(color)
+		Mover(Este)
+	}
+	PintaColumna(color)
+}
