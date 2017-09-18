@@ -1,6 +1,7 @@
 /* */
+/* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta*/
 function vacia(){
-	return (not hayBolitas())
+	return (not ( hayBolitas(Azul) || hayBolitas(Negro) || hayBolitas(Rojo) || hayBolitas(Verde) ) )
 }
 
 function conBolitas(){
