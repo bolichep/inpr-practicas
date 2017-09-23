@@ -81,3 +81,53 @@ procedure CopiarCeldaAl(dir){
 		PonerNAl(color, dir, nroBolitas(color))
 	}
 }
+
+
+/* Quita "deg" cantidad de bolitas de color "c" si hay mas de "deg" de bolitas de color "c",  si no saca todas las de este color */
+procedure DegradarCelda(deg, c){
+	if (nroBolitas(c) > deg){
+		SacarN(c, deg)
+	} else {
+		SacarTodas(c)
+	}
+}
+
+
+/* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta*/
+function vacia(){
+	return (not ( hayBolitas(Azul) || hayBolitas(Negro) || hayBolitas(Rojo) || hayBolitas(Verde) ) )
+}
+
+/* Mueve el cabezal hasta la primer celda color c desde la celda actual hasta el borde en direccion d. Si No encuentra celda con el color c y el cabezal queda en la celda mas al "d" de la fila o columna*/
+procedure IrHastaColor(c, d){
+	while ( puedeMover(d) && not hayBolitas(c)){
+		Mover(d)
+	}
+}
+
+/* Lleva el cabezal al extremo de la fila (Este u Oeste) o columna (Sur o Norte) */
+procedure IrAlExtremo(d){
+	while ( puedeMover(d) ) {
+		Mover(d)
+	}
+}
+
+/* Recibe dos direcciones d1 y d2 y mueve el cabezal al inicio del recorrido. En otras palabras, el cabezal se mueve al extremo opuesto(d1) + opuesto(d2) */
+procedure IrAlInicioT(d1, d2){
+	IrAlExtremo(opuesto(d1))
+	IrAlExtremo(opuesto(d2))
+}
+
+function puedeMoverT(d1, d2){
+	return ( puedeMover(d1) || puedeMover(d2) )
+}
+
+/* Precondicion: debe haber una celda en direccion d2 o d1 */
+procedure MoverT(d1, d2){
+	if (puedeMover(d1)){
+		Mover(d1)
+	}else{
+		IrAlExtremo(opuesto(d1))
+		Mover(d2)
+	}
+}
