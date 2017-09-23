@@ -1,6 +1,6 @@
 
 function nroCeldasALoLargo(dir){
-	/* cuenta las celdas en la direccion actual de extremo a extremo 
+	/* cuenta las celdas en la direccion dir de extremo a extremo 
 	prerequisitos: ninguno
 	param: dir es una direccion*/
 	total_celdas := 0
