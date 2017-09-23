@@ -131,3 +131,46 @@ procedure MoverT(d1, d2){
 		Mover(d2)
 	}
 }
+/* retorna el valor en valueTrue si se cumple la condicion bool como verdadra, en caso contrario devuelve el valor en valueFalse */
+function ifElse(bool, valueTrue, valueFalse
+){
+	value := valueFalse
+	if (bool){
+		value := valueTrue
+	}
+	return (value)
+}
+
+procedure IrANesimaVacia(n){
+	/* Mueve el cabezal hasta la n esima celda vacia del tablero respecto a la celda inicial (Sur-Oeste) y recorriendo el tablero en direccion Noret Este, si no la encuentra queda en la ultima */ 
+	vacias_vistas := 0
+	IrAlInicioT(Norte, Este)
+	vacias_vistas := ifElse(vacia(), vacias_vistas + 1, vacias_vistas)
+	while ( puedeMoverT(Norte, Este) && n /= vacias_vistas ){
+		MoverT(Norte,Este)
+		vacias_vistas := ifElse(vacia(), vacias_vistas + 1, vacias_vistas)
+	}
+}
+
+function menor(v1, v2){
+	/* proposito: denota el menor valor entre v1 y v2.
+	precond: v1 y v2 deben denotar el mismo tipo de valores 
+	param: v1 y v2 valores a comparar. */
+	menor := v1
+	if (v1 > v2){
+		menor := v2
+	}
+	return (menor)
+}
+
+function mayor(v1, v2){
+	/* proposito: denota el mayor valor entre v1 y v2.
+	precond: v1 y v2 deben denotar el mismo tipo de valores 
+	param: v1 y v2 valores a comparar. */
+	mayor := v1
+	if (v1 < v2){
+		mayor := v2
+	}
+	return (mayor)
+}
+
