@@ -1,0 +1,16 @@
+/* Pone una bolita de cada color en la celda actual */
+procedure PonerUnaDeCada(){
+	foreach color in [minColor()..maxColor()] {
+		Poner(color)
+		}
+}
+
+program{
+
+	IrAlInicioT(Oeste, Norte)
+	while (puedeMoverT(Oeste, Norte)){
+		PonerUnaDeCada()
+		MoverT(Oeste, Norte)
+	}
+	PonerUnaDeCada()
+}
