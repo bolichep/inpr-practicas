@@ -1,0 +1,22 @@
+function minColorActual(){
+	/* proposito: retorna el color minimo en la celda actual. Si no hay bolitas retorna el color maximo.
+	precondicion: debe haber al menos alguna bolita en la celda actual
+	param: no tiene */
+
+  color_actual := minColor()
+	while ( not hayBolitas(color_actual) && color_actual /= maxColor()) {
+		color_actual := siguiente(color_actual)
+	}
+	return (color_actual)
+}
+
+procedure Nada(){
+	ar := [1..3]
+	foreach n in ar {
+		Poner(Rojo)
+	}
+}
+program{
+	-- Nada()
+	return (minColorActual())
+}
