@@ -1,0 +1,29 @@
+
+function nroCeldasALoLargo(dir){
+	/* cuenta las celdas en la direccion actual de extremo a extremo 
+	prerequisitos: ninguno
+	param: dir es una direccion*/
+	total_celdas := 0
+	IrAlExtremo(opuesto(dir))
+	while ( puedeMover(dir) ){
+		total_celdas := total_celdas + 1
+		Mover(dir)
+	}
+	return ( total_celdas + 1)
+}
+
+function nroFilas(){
+	/* denota la cantidad de filas que tiene el tablero */
+	return (nroCeldasALoLargo(Norte))
+}
+
+function nroColumnas(){
+	/* denota la cantidad de columnas que tiene el tablero */
+	return (nroCeldasALoLargo(Este))
+}
+
+program{
+	return (nroColumnas(), nroFilas())
+}
+	
+
