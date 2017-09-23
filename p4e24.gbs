@@ -1,28 +1,33 @@
 /* */
 /* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta*/
-function vacia(){
+function vaciaX(){
 	return (not ( hayBolitas(Azul) || hayBolitas(Negro) || hayBolitas(Rojo) || hayBolitas(Verde) ) )
 }
 
+/* determina si la celda actual tiene bolitas (no importa el color). */
 function conBolitas(){
 	return (not vacia())
 }
 
+/* determina si la celda al "d" tiene bolitas (no importa el color). */
 function conBolitasAl(d){
 	Mover(d)
 	return (conBolitas())
 }
 
+/*indica si en todas las direcciones hay celdas lindantes con bolitas (no importa el color).*/
 function lindanteConBolitas(d){
 	return (puedeMover(d) && conBolitasAl(d))
 }
 
-function lindanteConBolitas(){
+/* */
+function lindantesConBolitas(){
 		return ( lindanteConBolitas(Norte) && lindanteConBolitas(Este) && lindanteConBolitas(Sur) && lindanteConBolitas(Oeste) )
 }
 
+/* determina si la celda actual tiene forma de cruz, i.e., determina si la celda actual tiene bolitas y a la vez en todas las direcciones hay celdas lindantes con bolitas (no importa el color) */
 function enCruz() {
-	return ( conBolitas() && lindanteConBolitas())
+	return ( conBolitas() && lindantesConBolitas() )
 }
 
 function enCruzAl(d){
@@ -32,7 +37,7 @@ function enCruzAl(d){
 
 function enCruzDiag(d){
 	Mover(d)
-	return (enCruzAl(siguiente(d))
+	return (enCruzAl(siguiente(d)) )
 }
 
 function lindanteEnCruz(d){
@@ -48,3 +53,27 @@ function explosion(){
 }
 
 
+procedure SaltarFila(){
+			while (puedeMover(Oeste)){
+				Mover(Oeste)
+			}
+}
+
+procedure Temp(){
+	while (puedeMover(Norte) || puedeMover(Este) ){
+		PonerSi(Rojo, explosion())
+	--	Poner(Verde)
+		if (puedeMover(Este)){
+			Mover(Este)
+		}
+		else {
+			SaltarFila()
+			Mover(Norte)
+			}
+	}
+}
+program{
+	Temp()
+	PonerSi(Rojo, not(puedeMover(Norte)))
+}
+		
