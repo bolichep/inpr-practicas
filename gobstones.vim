@@ -1,4 +1,4 @@
-" this in .vim/syntax (aparently)
+" this in .vim/syntax (aparently )
 " Vim syntax file
 " Language: Gobstones
 " Maintainer: Nahuel Garbezza
@@ -16,7 +16,7 @@ syn keyword boolean   True False
 syn keyword color     Azul Negro Rojo Verde
 syn keyword direction Norte Este Sur Oeste
 " primitive commands/expressions
-syn keyword primitiveCommand    Poner Sacar Mover BOOM Skip IrAlOrigen VaciarTablero
+syn keyword primitiveCommand    Poner Sacar Mover BOOM Skip VaciarTablero IrAlBorde IrALOrigen
 syn keyword primitiveExpression nroBolitas hayBolitas puedeMover minBool maxBool minColor maxColor minDir maxDir siguiente previo opuesto
 " comments
 syn match singleLineComment "--.*$"
