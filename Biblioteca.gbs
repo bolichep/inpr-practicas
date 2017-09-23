@@ -1,6 +1,8 @@
 --  JCFS Biblioteca
 procedure PonerN(veces, color){
-/* Proposito:: Colocar "veces" bolitas de color "color" en la celda actual. */
+/* Proposito:: Colocar "veces" bolitas de color "color" en la celda actual. (ref p3 e11)
+	precondiciones: no tiene.
+	param: veces denota un numero. color denota un color.*/
   repeat(veces){
 		Poner(color);
 	}
@@ -22,8 +24,16 @@ procedure PonerSi(color, b){
 	}
 }
 
+procedure PonerTodosLosColores(){
+	/* Deposita una bolita de cada color en la celda actual. (ref: p3 e15)
+	precondicion: no tiene
+	param: no tiene. */
+	foreach color in [minColor()..maxColor()]{
+		Poner(color)
+	}
+}
 procedure SacarN(color, veces){
-/* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. 
+/* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. (ref: p3 e12)
    Precondicion: Debe haber "veces" bolitas color "color" en la celda actual */
   repeat(veces){
 		Sacar(color);
@@ -32,7 +42,8 @@ procedure SacarN(color, veces){
 
 procedure SacarSi(color, condicion){
 	/* Saca una bolita de color "color" si se cumple la condicion "condicion".
-	Debe haber una bolita de color "color". */
+	precondicion: Debe haber una bolita de color "color". */
+	param: color denota un color y condicion denota un booleano.
 	if (condicion){
 		Sacar(color)
 	}
@@ -47,17 +58,24 @@ procedure MoverN(direccion, numero){
 }
 
 procedure MoverSi(direccion, condicion){
-	/* Mueve el cabezal si se cumple la condicion "condicion" */
+	/* Mueve el cabezal en doreccion "direccion" si se cumple la condicion "condicion" 
+	precondicion: debe haber una celda al "direccion" 
+	param: direccion denota una direccion. condicion denota un booleano */
 	if (condicion){
 		Mover(direccion)
 	}
 }
 
 procedure SacarTodas(color){
-	/* Saca todas las bolitas de color "color" de la celda actual */
+	/* Saca todas las bolitas de color "color" de la celda actual (ref: p3 e13)
+	precondicion: no tiene
+	param: color denota un color */
 	SacarN(color, nroBolitas(color))	
 }
 
+/* Pinta una linea "color" en al "direccion" de largo "numero"
+	precondicion: debe haber "numero celdas al "direccion" de la celda actual
+	param: color denota un color. numero denota un numero. direccion denota una direccion */
 procedure LineaNAl(color, numero, direccion){
 	repeat(numero){
 		Mover(direccion)
@@ -75,7 +93,8 @@ procedure CopiarBolitasCAl(color, dir){
 }
 
 /* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
- Precondicion: Una celda en direccion "dir" */
+ Precondicion: Una celda en direccion "dir" 
+ param: dir denota una direccion */
 procedure CopiarCeldaAl(dir){
 	foreach color in [minColor()..maxColor()]{
 		PonerNAl(color, dir, nroBolitas(color))
@@ -93,31 +112,46 @@ procedure DegradarCelda(deg, c){
 }
 
 
-/* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta*/
+/* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta
+ precondicion: no tiene
+ param: no tiene */
 function vacia(){
 	return (not ( hayBolitas(Azul) || hayBolitas(Negro) || hayBolitas(Rojo) || hayBolitas(Verde) ) )
 }
 
-/* Mueve el cabezal hasta la primer celda color c desde la celda actual hasta el borde en direccion d. Si No encuentra celda con el color c y el cabezal queda en la celda mas al "d" de la fila o columna*/
+/* Mueve el cabezal hasta la primer celda color c desde la celda actual hasta el borde en direccion d. Si No encuentra celda con el color c y el cabezal queda en la celda mas al "d" desde la celda actual (ref p6 e3)
+ precondicion: no tiene
+ param: c denota un color y de denota una direccion */
 procedure IrHastaColor(c, d){
 	while ( puedeMover(d) && not hayBolitas(c)){
 		Mover(d)
 	}
 }
 
-/* Lleva el cabezal al extremo de la fila (Este u Oeste) o columna (Sur o Norte) */
+/* Lleva el cabezal al extremo de la fila (Este u Oeste) o columna (Sur o Norte)
+ precondicion: no tiene
+ param: d denota una direccion */
 procedure IrAlExtremo(d){
 	while ( puedeMover(d) ) {
 		Mover(d)
 	}
 }
 
-/* Recibe dos direcciones d1 y d2 y mueve el cabezal al inicio del recorrido. En otras palabras, el cabezal se mueve al extremo opuesto(d1) + opuesto(d2) */
+/* Recibe dos direcciones d1 y d2 y mueve el cabezal al inicio del recorrido. En otras palabras, el cabezal se mueve al extremo opuesto(d1) + opuesto(d2)  (ref: p6 e10)
+ precondicion: no tiene 
+ param: d1 y d2 denotan direcciones (opuestas a lo esperado)*/
 procedure IrAlInicioT(d1, d2){
 	IrAlExtremo(opuesto(d1))
 	IrAlExtremo(opuesto(d2))
 }
 
+/* Posiciona el cabezal en el origen del tablero (ref: p6 e6)
+	precondicon: no tiene 
+	param: no tiene */
+procedure IrAlOrigen(){
+	IrAlExtremo(Oeste)
+	IrAlExtremo(Sur)
+}
 function puedeMoverT(d1, d2){
 	return ( puedeMover(d1) || puedeMover(d2) )
 }
