@@ -9,7 +9,9 @@ procedure PonerN(veces, color){
 }
 
 procedure PonerNAl(color, numero, dir){
-	/* Pone "numero" bolitas de color "color" en la celda lindante en direccion "dir" dejando el cabezal en la celda actual */
+	/* Pone "numero" bolitas de color "color" en la celda lindante en direccion "dir" dejando el cabezal en la celda actual (ref:p3 e20) 
+	precondicion: debe haber tantas celdas como indica "numero" en al "direccion"
+	param: color denota color, numero denota un numero y dir denota una direccion */
 	Mover(dir)
 	repeat(numero){
 		Poner(color)
@@ -18,7 +20,7 @@ procedure PonerNAl(color, numero, dir){
 }
 
 procedure PonerSi(color, b){
-/* Dado un color "color" y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False.*/
+/* Dado un color "color" y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False. (ref: p4 e13) */
 	if (b){
 		Poner(color)
 	}
@@ -41,9 +43,9 @@ procedure SacarN(color, veces){
 }
 
 procedure SacarSi(color, condicion){
-	/* Saca una bolita de color "color" si se cumple la condicion "condicion".
-	precondicion: Debe haber una bolita de color "color". */
-	param: color denota un color y condicion denota un booleano.
+	/* Saca una bolita de color "color" si se cumple la condicion "condicion". (ref: p4 e14)
+	precondicion: Debe haber una bolita de color "color". 
+	param: color denota un color y condicion denota un booleano. */
 	if (condicion){
 		Sacar(color)
 	}
