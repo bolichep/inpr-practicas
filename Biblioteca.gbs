@@ -210,3 +210,24 @@ function mayor(v1, v2){
 	return (mayor)
 }
 
+/* Limpia la Celda actual 
+ precondicion: no tiene 
+ param: no tiene */
+procedure LimpiarCelda(){
+	foreach c in [minColor()..maxColor()]{
+		SacarTodas(c)
+	}
+}
+	
+/* Limpia el Tablero . Usa la funcion LimpiarCelda() 
+	precondiciones: no tiene
+	param: no tiene */
+procedure LimpiarTablero(){
+	IrAlInicioT(Norte, Este)
+	while (puedeMoverT(Norte, Este)){
+		LimpiarCelda()
+		MoverT(Norte, Este)
+	}
+	LimpiarCelda()
+}
+

@@ -1,0 +1,133 @@
+function celulaViva(){
+  return (hayBolitas(Verde))
+  }
+
+function nroVivasAl(dir){
+  nroTotal := 0
+
+  if(puedeMover(dir)){
+    Mover(dir)
+    nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal)
+  }
+  if(puedeMover(siguiente(dir))){
+    Mover(siguiente(dir))
+    nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal)
+  }
+
+  return(nroTotal) 
+}
+
+
+function nroVecinas(){
+  nroTotal := 0
+  foreach dir in [minDir()..maxDir()]{
+    nroTotal := nroTotal + nroVivasAl(dir)
+  }
+  PonerN(nroTotal, Rojo) // <- No Funca
+  return (nroTotal)
+}
+
+procedure MarcarCelulaParaSerEliminada(){
+  Poner(Negro)
+}
+
+procedure MarcarCelulaParaSerReanimada(){
+  Poner(Azul)
+}
+
+function haySuperPoblacion(){
+  return (celulaViva() && nroVecinas() > 3)
+}
+
+function hayEscacez(){
+  return (celulaViva() && nroVecinas() < 2)
+}
+
+function hayContinuidad(){
+  return (celulaViva() && nroVecinas() == 2 || nroVecinas() == 3)
+}
+
+function hayReproduccion(){
+  return ( not celulaViva() && nroVecinas() == 3)
+}
+
+procedure MarcarIf(){
+  if (haySuperPoblacion() || hayEscacez()){
+      MarcarCelulaParaSerEliminada()
+  }
+  if (hayReproduccion() ) {
+      MarcarCelulaParaSerReanimada()
+  }
+}
+
+function estaMarcadaParaSerEliminada(){
+  return (hayBolitas(Negro))
+}
+
+function estaMarcadaParaSerReanimada(){
+  return (hayBolitas(Azul))
+}
+
+procedure QuitarMarcas(){
+  if (hayBolitas(Negro)){
+    Sacar(Negro)
+  }
+  if (hayBolitas(Azul)){
+    Sacar(Azul)
+  }
+}
+
+procedure EliminarCelula(){
+  if (estaMarcadaParaSerEliminada()){
+    Sacar(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure ReanimarCelula(){
+  if (estaMarcadaParaSerReanimada()){
+    Poner(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure ActualizarCelula(){
+  if (celulaViva()){
+    EliminarCelula()
+  } else {
+    ReanimarCelula()
+  }
+}
+
+procedure ActualizarUniverso(){
+  IrAlInicioT(Norte, Este)
+  while(puedeMoverT(Norte, Este) ){
+    ActualizarCelula()
+    MoverT(Norte, Este)
+  }
+  ActualizarCelula()
+}
+
+procedure ProcesarUniverso(){
+  IrAlInicioT(Norte, Este)
+  while(puedeMoverT(Norte, Este) ){
+    ProcesarCelula()
+    MoverT(Norte, Este)
+  }
+  ProcesarCelula()
+}
+procedure ProcesarCelula(){
+  MarcarIf()
+}
+
+procedure Simular(nro){
+  repeat (nro) {
+    ProcesarUniverso()
+    ActualizarUniverso()
+  }
+}
+program{
+  //ProcesarUniverso()
+  //ActualizarUniverso()
+  Simular(1)
+}
