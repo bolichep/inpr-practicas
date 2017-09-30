@@ -231,3 +231,10 @@ procedure LimpiarTablero(){
 	LimpiarCelda()
 }
 
+function nroBolitasAl(c, dir){
+	Mover(dir)
+	return(nroBolitas(c))
+}
+
+	
+
