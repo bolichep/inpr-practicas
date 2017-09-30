@@ -1,0 +1,24 @@
+/* Posiciona el cabezal en la celda siguiente vacia del tablero un un recorrido dint + dext*/
+procedure BuscarSiguienteVacia(dint, dext){
+  while (puedeMoverT(dint, dext) && not vacia()){
+    MoverT(dint, dext)
+    }
+}
+/* Recorre los colores y por cada color c busca una celda vacia y pone una bolita de color c */
+procedure PonerUnaDeCadaEnCeldasVacias(c){
+  nextColor := siguiente(c)
+  while ( puedeMoverT(Norte, Este) ){
+    BuscarSiguienteVacia(Norte, Este)
+    Poner(nextColor) 
+    nextColor := siguiente(nextColor)
+  }
+}
+/* Pone una bolita en cada celda vacia del tablero de forma que los colores de las bolitas nuevas alternen entre A N R y V en ese orden enun recorrido del tablero */
+procedure DistribuirVacias(){
+  IrAlInicioT(Norte, Este)
+  PonerUnaDeCadaEnCeldasVacias(previo(Azul))
+}
+
+program{
+  DistribuirVacias()
+}
