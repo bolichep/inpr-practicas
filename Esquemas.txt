@@ -1,0 +1,23 @@
+esquema R e c o r r i d o C o n O r d e n ( <params> ) {
+  <IrAPrimerElemento> ( <args> )
+  w h i l e ( p u e d e M o v e r A S i g u i e n t e E l e m e n t o ( <args> ) ) {
+    <ProcesarElemento> ( <args> )
+    <MoverASiguienteElemento> ( <args> )
+  }
+  <ProcesarElemento> ( <args> )
+}
+
+esquema R e c o r r i d o D e s o r d e n a d o ( <params> ) {
+  w h i l e ( h a y E l e m e n t o s P a r a P r o c e s a r ( <args> ) ) {
+    <BuscarUnElemento> ( <args> )
+    < P r o c e s a r E l e m e n t o Y Q u i t a r l o D e l R e c o r r i d o > ( <args> )
+  }
+}
+
+esquema BuscarEnTablero<d1,d2> ( <params> ) {
+  I r A l I n i c i o T ( d1,d2 )
+  w h i l e ( n o t e s C e l d a B u s c a d a ( <args> ) /∗&& puedeMoverT ( d 1 , d 2 ) ∗/ ) {
+    MoverT ( d 1 , d 2 )
+  }
+  /∗ r e t u r n ( e s C e l d a B u s c a d a ( i t ! <args> ! ) )
+}
