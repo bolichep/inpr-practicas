@@ -1,3 +1,6 @@
+/* denota booleano indicando si la celda actual esta viva o no
+prec: no tiene
+para: no tiene */ 
 function celulaViva(){
   return (hayBolitas(Verde))
   }
