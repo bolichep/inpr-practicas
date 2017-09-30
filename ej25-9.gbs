@@ -1,0 +1,8 @@
+progrma {
+  return()
+}
+
+function nroVacias() {
+  vacias := 0 
+  IrAlInicio(Norte, Este)
+  while}
