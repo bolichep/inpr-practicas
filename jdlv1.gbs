@@ -4,24 +4,24 @@ function celulaViva(){
 
 function nroVivasAl2(dir){
   nroTotal := 0
-	
+
   if(puedeMover(dir)){
     Mover(dir)
     nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal)
   }
 
-  return(nroTotal) 
+  return(nroTotal)
 }
 
 function nroVivasAl(dir){
   nroTotal := 0
-	
+
   if(puedeMover(dir)){
     Mover(dir)
     nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal) + nroVivasAl2(siguiente(dir))
   }
 
-  return(nroTotal) 
+  return(nroTotal)
 }
 
 function nroVecinas(){
@@ -82,6 +82,59 @@ procedure QuitarMarcas(){
   }
 }
 
+-- Marcado de islotes
+function getVecinasMark(){
+	return (nroVecinas())
+}
+
+function getMark(){
+	return (nroBolitas(Verde))
+}
+
+function hayMark(){
+	IrAlInicioT(Norte, Este)
+	while(not hayBolitas(Rojo) && puedeMoverT(Norte, Este)){
+		MoverT(Norte, Este)
+	}
+  return ( hayBolitas(Rojo))
+}
+
+procedure IrAMark(){
+	IrAlInicioT(Norte, Este)
+	while(not hayBolitas(Rojo) && puedeMoverT(Norte, Este)){
+		MoverT(Norte, Este)
+	}
+}
+
+procedure DoIMarkIt(){
+	if (celulaViva() && nroVecinas() > 0 && getVecinasMark() > 0){
+		PonerN(getMark(), Rojo) // Vecinas Mark denota un numero
+	}
+}
+
+
+procedure MarcarIslotes(){
+	IrAlInicioT(Sur, Este)
+	while (puedeMoverT(Sur, Este)){
+		DoIMarkIt()
+		MoverT(Sur, Este)
+	}
+	DoIMarkIt()
+}
+
+procedure NombrarIslotes(){
+	IrAlInicioT(Norte, Este)
+	while( hayMark()){
+		IrAMark()
+		Sacar(Rojo)
+		Poner(Negro)
+		MoverT(Norte, Este)
+	}
+}
+
+
+-- End of Marcado de Islotes
+
 procedure EliminarCelula(){
   if (estaMarcadaParaSerEliminada()){
     Sacar(Verde)
@@ -136,4 +189,6 @@ program{
   -- ProcesarUniverso()
   //ActualizarUniverso()
   Simular(1)
+	MarcarIslotes()
+	NombrarIslotes()
 }
