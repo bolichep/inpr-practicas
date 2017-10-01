@@ -1,0 +1,50 @@
+/* Tetris */
+function colorPieza(){
+	/* prop: denota el color de una pieza. en este caso Rojo*/
+	/* prec: no tiene */
+	return (Rojo)
+}
+
+function numeroPiso(){
+	-- denota el piso, en este caso 1
+	-- prec: no tiene
+	return (1)
+}
+
+function numeroSeccion(){
+	-- proc: denotar el numero de seccion. en este caso el numero de bolitas colorPieza
+	-- prec: no tiene
+	return (nroBolitas(colorPieza()))
+}
+
+function estaFlotando(){
+	-- prop: denota booleano. suponiendo que el cabezal este en una seccion denotara True si la seccion sea mayor a uno.
+	-- prec: el cabezal esta sobre una pieza
+	return (numeroSeccion() > 1)
+}
+
+function haySeccionAl(dir){
+	-- denota True si hay session al dir. si no puede mover retorna False
+	if (puedeMover(dir)){
+		Mover(dir)
+	}
+	return (numeroSeccion() > 0 && puedeMover(dir))
+}
+
+function numeroSeccionAl(dir){
+	-- prop: denota el numero de seccion en direccion dir
+	-- prec: debe haber una celda en la direccion dir
+	Mover(dir)
+	return (numeroSeccion())
+}
+
+function continuarPiezaHacia(dir){
+	-- prop: denota True si la pieza continua en direccion dir
+	-- prec: el cabezal esta sobre una pieza flotante
+}
+
+program{
+	return(numeroSeccionAl(Norte))
+}
+
+
