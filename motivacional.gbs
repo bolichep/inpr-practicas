@@ -1,0 +1,20 @@
+/* Desde el pdf de la teoria cuatro. Precondicion: El cabezal no esta ni 
+	en en la primer ni en la ultima columna */
+
+procedure Motivacional(){
+	Mover(Oeste)
+	PonerNAl(Negro, nroBolitas(Azul), Este)
+	MoverN(Este, 2)
+	PonerNAl(Verde, nroBolitas(Azul), Oeste)
+	Mover(Oeste)
+	if (nroBolitas(Negro) > nroBolitas(Verde)) {
+		Poner(Rojo)
+	}
+	SacarN(Verde, nroBolitas(Verde))
+	SacarN(Negro, nroBolitas(Negro))
+}
+
+program{
+	Motivacional()
+}
+

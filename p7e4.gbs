@@ -1,0 +1,11 @@
+function nroVacias(){
+  total_vacias := 0
+  IrAlInicioT(Norte, Este)
+  while (puedeMoverT(Norte, Este)){
+    total_vacias := ifElse(vacia(), total_vacias + 1, total_vacias)
+    MoverT(Norte, Este)
+  }
+  return (ifElse(vacia(), total_vacias + 1, total_vacias))
+}
+
+program{ return (nroVacias()) }

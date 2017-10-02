@@ -1,0 +1,18 @@
+procedure CopiarBolitasAlNorte(color){
+	repeat(nroBolitas(color)){
+		Mover(Norte)
+		Poner(color)
+		Mover(Sur)
+	}
+}
+/* Proposito: Copiar todas las bolitas de la celda actual a la celda lindante al Norte 
+   Precondicion: Tener una celda lindante al Norte */
+procedure CopiarCeldaAlNorte(){
+	foreach color in [minColor()..maxColor()]{
+		CopiarBolitasCAl(color, Norte)
+		//CopiarBolitasAlNorte(color)
+	}
+}
+program {
+	CopiarCeldaAlNorte()
+}

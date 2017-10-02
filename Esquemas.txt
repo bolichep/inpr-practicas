@@ -1,0 +1,59 @@
+/*
+* Esquema general de recorrido de tableros
+	- Sirve para recorrer todas las celdas de un tablero
+	- Depende de dos parámetros que indican la dirección
+	- Primero dir int y luego dir ext
+*/
+esquema RecorrerTablero <d1, d2> ( <params> )
+  IrAlInicioT (d1, d2)
+  while ( puedeMoverT (d1, d2) ) {
+    <ProcesarCelda> ( <args> )
+    MoverT (d1, d2)
+  }
+  <ProcesarCelda> ( <args> )
+}
+
+
+/*
+* Esquema de busqueda en un tablero
+	- Posiciona el cabezal en alguna celda
+	- Podemos usarlo en una función para determinar si dicha celda existe
+*/
+esquema BuscarEnTablero<d1,d2> ( <params> ) {
+  IrAlInicioT ( d1, d2 )
+  while (not esCeldaBuscada( <args> ) /* && puedeMoverT(d1 ,d 2 ) */ ) {
+    MoverT (d1, d2)
+  }
+  /* return It!!! */
+  return ( esCeldaBuscada( <args> ) )
+}
+
+
+/*
+* Recorrido General 1
+	- Los elementos a recorrer no tienen por qué ser celdas
+	- El esquema siguiente funciona simpre que los elementos tengan algún orden e.g., recorrer las celdas desde la que tiene menor cantidad de bolitas rojas a la que más tiene
+*/
+
+esquema RecorridoConOrden ( <params> ) {
+  <IrAPrimerElemento> ( <args> )
+  while ( puedeMoverASiguienteElemento ( <args> ) ) {
+    <ProcesarElemento> ( <args> )
+    <MoverASiguienteElemento> ( <args> )
+  }
+  <ProcesarElemento> ( <args> )
+}
+
+/*
+* Recorrido General 2
+	- El siguiente esquema funciona cuando no se puede establecer un orden de los elementos
+	- Requiere que los elementos puedan “sacarse” del recorrido (e.g., marcandolos)
+e.g., recorrer todas las celdas alcanzables desde una celda prefijada, recorriendo sólo celdas con bolitas azules
+*/
+
+esquema RecorridoDesordenado ( <params> ) {
+  while ( hayElementosParaProcesar ( <args> ) ) {
+    <BuscarUnElemento> ( <args> )
+    <ProcesarElementoYQuitarloDelRecorrido> ( <args> )
+  }
+}

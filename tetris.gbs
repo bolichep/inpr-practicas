@@ -1,0 +1,138 @@
+/* Tetris */
+function colorPieza(){
+	/* prop: denota el color de una pieza. en este caso Rojo*/
+	/* prec: no tiene */
+	return (Rojo)
+}
+
+function numeroPiso(){
+	-- denota el piso, en este caso 1
+	-- prec: no tiene
+	return (1)
+}
+
+function numeroSeccion(){
+	-- proc: denotar el numero de seccion. en este caso el numero de bolitas colorPieza
+	-- prec: no tiene
+	return (nroBolitas(colorPieza()))
+}
+
+function estaFlotando(){
+	-- prop: denota booleano. suponiendo que el cabezal este en una seccion denotara True si la seccion sea mayor a uno.
+	-- prec: el cabezal esta sobre una pieza
+	return (numeroSeccion() > numeroPiso())
+}
+
+function haySeccionAl(dir){
+	-- prop: denota True si hay session al dir. si no puede mover retorna False
+	-- prec: no tiene
+	if (puedeMover(dir)){
+		Mover(dir)
+	}
+	return (numeroSeccion() > 0 && puedeMover(dir))
+}
+
+function numeroSeccionAl(dir){
+	-- prop: denota el numero de seccion en direccion dir
+	-- prec: debe haber una celda en la direccion dir
+	Mover(dir)
+	return (numeroSeccion())
+}
+
+function continuaPiezaHacia(dir){
+	-- prop: denota True si la pieza continua en direccion dir
+	-- prec: el cabezal esta sobre una pieza flotante
+	return(haySeccionAl(dir) && numeroSeccion() == numeroSeccionAl(dir)) -- ?????
+}
+
+
+function centroDePiezaAl(dir){
+	return (haySeccionAl(dir) && haySeccionAl(opuesto(dir)) && numeroSeccionAl(dir) == numeroSeccionAl(opuesto(dir)) )
+}
+	
+function centradoEnPieza(){
+	-- prop: denota True si el cabezal esta en la seccion central de una pieza flotante
+	-- prec: el cabezal debe estar situado en la seccion de una celda flotante 
+	-- para: no tiene
+	return (centroDePiezaAl(Norte) || centroDePiezaAl(Este))
+}
+
+procedure CentrarEnPieza(){
+	-- prop: colocar el cabezal en el centro de la pieza
+	-- prec: el cabezal debe estar sobre una seccion de una pieza flotante
+	-- trampa
+	if (not centradoEnPieza()){
+		dir := minDir()
+		while( not continuaPiezaHacia(dir) ) { 
+			dir := siguiente(dir)
+			}
+		Mover(dir)
+	}
+}
+
+function esHorizontal(){
+	-- prop: denota True si la pieza esta en posicion horizontal
+	-- prec: el cabezal debe estar en una seccion de una pieza flotante
+	CentrarEnPieza()
+	return( continuaPiezaHacia(Este))
+}
+
+procedure SacarLindantesEnLinea(dir){
+	-- prop: Saca las lindantes hacia un lado y el otro
+	-- prec: el cabezal debe estar en una seccion de una pieza flotante
+	Mover(dir) 
+	repeat (2){
+		SacarN(colorPieza(), numeroSeccion())
+		Mover(opuesto(dir))
+	}
+	SacarN(colorPieza(), numeroSeccion())
+	Mover(dir)
+}
+
+procedure BorrarPieza(){
+	-- prop: borrar la pieza en donde esta parado el cabezal
+	-- prec: debe haber una pieza bajo el cabezal
+	-- para: no
+	CentrarEnPieza()
+	foreach dir in [minDir()..maxDir()]{
+		if ( continuaPiezaHacia(dir)){
+			SacarLindantesEnLinea(dir)
+		}
+	}
+}
+
+
+
+-- TEST
+function test1(){
+	BorrarPieza()
+	return( esHorizontal() )
+}
+
+function test2(){
+	Mover(Este)
+	BorrarPieza()
+	return(esHorizontal())
+}
+
+function test3(){
+	IrAlExtremo(Este)
+	BorrarPieza()
+	return(esHorizontal())
+}
+
+function test4(){
+	IrAlExtremo(Norte)
+	Mover(Este)
+	BorrarPieza()
+	return(esHorizontal())
+}
+
+program{
+	BorrarPieza()
+	Mover(Este)
+	BorrarPieza()
+	IrAlExtremo(Norte)
+	BorrarPieza()
+	-- return(test1(), test2(), test3(), test4())
+}

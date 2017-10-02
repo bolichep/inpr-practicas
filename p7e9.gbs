@@ -1,0 +1,12 @@
+procedure IrACoordenada(x, y){
+	/* Mueve el cabezal a las coordenadas x y del tablero. 
+	precondicion: debe existir tal coordenada 
+	param: x e y son numeros que denotan un par ordenado que denota la coordenada destino con 0 como referencia de origen */
+	IrAlOrigen()
+	MoverN(Este, x)
+	MoverN(Norte, y)
+}
+
+program{
+	IrACoordenada(1, 1)
+}

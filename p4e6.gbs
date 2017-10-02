@@ -1,0 +1,16 @@
+/* Dados dos colores c1 y c2  ponga una bolita de color c1 si la celda 
+  actual contiene la misma cantidad de bolitas de color c1 y c2 */
+
+procedure DesempatarDos(c1, c2){
+	if (nroBolitas(c1) == nroBolitas(c2)){
+		Poner(c1)
+	}
+}
+
+program{
+	DesempatarDos(Verde, Azul)
+	Mover(Este)
+	DesempatarDos(Verde, Azul)
+
+}
+

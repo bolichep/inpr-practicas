@@ -1,0 +1,8 @@
+/*~ Escribir un procedimiento ParidadLindantes(test, pone) que, dados dos colores test
+y pone, ponga una bolita de color pone en la celda actual si y sólo si cero, dos o cuatro de las
+celdas lindantes (al sur, norte, este y oeste) tienen bolitas de color test. El procedimiento
+debe funcionar independientemente de la posición en que se encuentre el cabezal. Puede
+suponer que no hay bolitas de color pone en la celda actual. Sugerencia: estructure bien su
+solución evitando la anidación de alternativas condicionales.*/
+
+procedure  

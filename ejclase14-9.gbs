@@ -1,0 +1,63 @@
+/* Chequea que todas las celdas al este sean de color c..
+/* Debe haber una celda al Este */
+function todasAlEsteConColor(c){
+  Mover(Este)
+  while{ puedeMover(Este) && hayBolitas(c)){ 
+    Mover(Este) 
+  }
+  return(hayBolitas(c))
+}
+
+/* Pone en color "pone" las celda actual si todas al este tienen alguna bolita color "c" 
+Debe tener una celda al Este */ 
+procedure PonerSiTodasAlEsteConColor(c, pone){
+  if ( todasAlEsteConColor(c) ){
+      Poner(c)
+    }
+  }
+}
+procedure IrAlExtremo(d){
+  while (puedeMover(d)){ Mover(d) } -- El Cabezal al extremo sur Oeste
+}
+-- Pone una bolita de color c en cada celda de la fila actual
+procedure PonerEnFila(c){
+  IrAlExtremo(Oeste)
+  while (puedeMover(Este)){
+    Poner(c)
+    Mover(Este)
+  }
+  Poner(c)
+}
+
+-- Saca una bolita de color c de cada celda de la fila actual
+-- Debe haber una bolita c en cada celda de la fila // Parcial
+procedure SacarDeFila(c){
+  IrAlExtremo(Oeste)
+  while (puedeMover(Este)){
+    Sacar(c)
+    Mover(Este)
+    }
+  Sacar(c)
+}
+
+-- Duplica la cantidad de bolitas de color c de cada celda de la fila actual
+-- 
+procedure DuplicarFila(c){
+  IrAlExtremo(Oeste)
+  while (puedeMover(Este)){
+    PonerN(c, nroBolitas(c))
+    Mover(Este)
+  }
+  PonerN(c, nroBolitas(c))
+}
+
+procedure AvanzaASiguienteCelda()
+-- Esquema de recorrido
+procedure PonerEnTablero(c){
+  IrAlInicioDelTablero()
+  while (not finDelRecorrido()){
+
+  }
+}
+program{
+}

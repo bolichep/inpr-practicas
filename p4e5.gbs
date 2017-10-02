@@ -1,0 +1,11 @@
+/* Agrega una bolita de color "c"  a la celda actual su hay una bolita 
+de color "x" y otra de color "y" */
+procedure PonerCSiHayXeY(c, x, y){
+	if (hayBolitas(x) && hayBolitas(y)){
+		Poner(c)
+	}
+}
+
+program{
+	PonerCSiHayXeY(Rojo, Verde, Verde)
+}

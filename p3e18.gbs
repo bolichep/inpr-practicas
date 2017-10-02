@@ -1,0 +1,17 @@
+/* Escalera de numero "n" , color "c" en direccion "d" tal qie recoorra
+las primeras n celdas  en direccion d poniendo una bolita de color c en 
+la celda actual, dos bolitas de color c en la celda siguiente, tres de 
+bolitas de color c en la siguiente celda., etc */
+
+procedure Escalera(n, c, d){
+	foreach num in [1..n-1]{
+		PonerN(num, c)
+		Mover(d)
+	}
+	PonerN(n, c)
+}
+
+program{
+	Escalera(3, Verde, Este)
+}
+

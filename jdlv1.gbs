@@ -1,0 +1,197 @@
+/* denota booleano indicando si la celda actual esta viva o no
+prec: no tiene
+para: no tiene */ 
+function celulaViva(){
+  return (hayBolitas(Verde))
+  }
+
+function nroVivasAl2(dir){
+  nroTotal := 0
+
+  if(puedeMover(dir)){
+    Mover(dir)
+    nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal)
+  }
+
+  return(nroTotal)
+}
+
+function nroVivasAl(dir){
+  nroTotal := 0
+
+  if(puedeMover(dir)){
+    Mover(dir)
+    nroTotal := ifElse(celulaViva(), nroTotal + 1, nroTotal) + nroVivasAl2(siguiente(dir))
+  }
+
+  return(nroTotal)
+}
+
+function nroVecinas(){
+  nroTotal := 0
+  foreach dir in [minDir()..maxDir()]{
+    nroTotal := nroTotal + nroVivasAl(dir)
+  }
+  return (nroTotal)
+}
+
+procedure MarcarCelulaParaSerEliminada(){
+  Poner(Negro)
+}
+
+procedure MarcarCelulaParaSerReanimada(){
+  Poner(Azul)
+}
+
+function haySuperPoblacion(){
+  return (celulaViva() && nroVecinas() > 3)
+}
+
+function hayEscacez(){
+  return (celulaViva() && nroVecinas() < 2)
+}
+
+function hayContinuidad(){
+  return (celulaViva() && nroVecinas() == 2 || nroVecinas() == 3)
+}
+
+function hayReproduccion(){
+  return ( not celulaViva() && nroVecinas() == 3)
+}
+
+procedure MarcarIf(){
+  if (haySuperPoblacion() || hayEscacez()){
+      MarcarCelulaParaSerEliminada()
+  }
+  if (hayReproduccion() ) {
+      MarcarCelulaParaSerReanimada()
+  }
+}
+
+function estaMarcadaParaSerEliminada(){
+  return (hayBolitas(Negro))
+}
+
+function estaMarcadaParaSerReanimada(){
+  return (hayBolitas(Azul))
+}
+
+procedure QuitarMarcas(){
+  if (hayBolitas(Negro)){
+    Sacar(Negro)
+  }
+  if (hayBolitas(Azul)){
+    Sacar(Azul)
+  }
+}
+
+-- Marcado de islotes
+function getVecinasMark(){
+	return (nroVecinas())
+}
+
+function getMark(){
+	return (nroBolitas(Verde))
+}
+
+function hayMark(){
+	IrAlInicioT(Norte, Este)
+	while(not hayBolitas(Rojo) && puedeMoverT(Norte, Este)){
+		MoverT(Norte, Este)
+	}
+  return ( hayBolitas(Rojo))
+}
+
+procedure IrAMark(){
+	IrAlInicioT(Norte, Este)
+	while(not hayBolitas(Rojo) && puedeMoverT(Norte, Este)){
+		MoverT(Norte, Este)
+	}
+}
+
+procedure DoIMarkIt(){
+	if (celulaViva() && nroVecinas() > 0 && getVecinasMark() > 0){
+		PonerN(getMark(), Rojo) // Vecinas Mark denota un numero
+	}
+}
+
+
+procedure MarcarIslotes(){
+	IrAlInicioT(Sur, Este)
+	while (puedeMoverT(Sur, Este)){
+		DoIMarkIt()
+		MoverT(Sur, Este)
+	}
+	DoIMarkIt()
+}
+
+procedure NombrarIslotes(){
+	IrAlInicioT(Norte, Este)
+	while( hayMark()){
+		IrAMark()
+		Sacar(Rojo)
+		Poner(Negro)
+		MoverT(Norte, Este)
+	}
+}
+
+
+-- End of Marcado de Islotes
+
+procedure EliminarCelula(){
+  if (estaMarcadaParaSerEliminada()){
+    Sacar(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure ReanimarCelula(){
+  if (estaMarcadaParaSerReanimada()){
+    Poner(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure ActualizarCelula(){
+  if (celulaViva()){
+    EliminarCelula()
+  } else {
+    ReanimarCelula()
+  }
+}
+
+procedure ActualizarUniverso(){
+  IrAlInicioT(Norte, Este)
+  while(puedeMoverT(Norte, Este) ){
+    ActualizarCelula()
+    MoverT(Norte, Este)
+  }
+  ActualizarCelula()
+}
+
+procedure ProcesarUniverso(){
+  IrAlInicioT(Norte, Este)
+  while(puedeMoverT(Norte, Este) ){
+    ProcesarCelula()
+    MoverT(Norte, Este)
+  }
+  ProcesarCelula()
+}
+procedure ProcesarCelula(){
+  MarcarIf()
+}
+
+procedure Simular(nro){
+  repeat (nro) {
+    ProcesarUniverso()
+    ActualizarUniverso()
+  }
+}
+
+program{
+  -- ProcesarUniverso()
+  //ActualizarUniverso()
+  Simular(1)
+	MarcarIslotes()
+	NombrarIslotes()
+}

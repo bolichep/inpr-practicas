@@ -1,0 +1,36 @@
+
+/* Saca una bolita "color" si en la celda lindante al "dir" hay Bolitas de color "color". Debe haber una celda en direccion "dir". */
+procedure SacarCSiCAl(color, dir){
+	Mover(dir)
+	if (hayBolitas(color)){
+		Mover(-dir)
+		Sacar(color)
+	}else{
+		Mover(-dir)
+	}
+}
+
+/* pone una bolita "color" si en la celda lindante al "dir" hay Bolitas de color "color". Debe haber una celda en direccion "dir". */
+procedure PonerCSiCAl(color, dir){
+	Mover(dir)
+	if (hayBolitas(color)){
+		Mover(-dir)
+		Poner(color)
+	}else{
+		Mover(-dir)
+	}
+}
+
+/* Agrega una bolita de color c en la celda actual, si en las celdas del Norte y del Sur hay bolitas de color x. Si no se cumple la condicion dada , agrega una bolita negra en la celda actual. ¿Que problema surge de la utilizacion de de los condicionales anidados? */
+procedure PonerCSiXNorteSur(c, x){
+	PonerCSiCAl(x, Norte)
+	PonerCSiCAl(x. Sur)
+	if (nroBolitas(x) == 2){
+		Poner(c)
+	}
+	
+}
+
+program{
+	PonerCSiXNorteSur()
+}

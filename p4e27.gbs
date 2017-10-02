@@ -1,0 +1,25 @@
+/* */
+function colorPieza(){
+	return (Rojo)
+}
+
+function numeroPiso(){
+	return (1)
+}
+
+function haySeccionAl_(d){ -- Parcial
+	Mover(d)
+	return (estaFlotando())
+}
+
+function haySeccionAl(d){ -- Total a partir de la parcial 
+	return (puedeMover(d) && haySeccionAl_(d)
+}
+
+
+program{
+	return (Norte)
+	return (Sur)
+}
+
+

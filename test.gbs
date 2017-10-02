@@ -1,0 +1,24 @@
+/* */ 
+function haySiguienteVacia(){
+	while(puedeMoverT(Norte, Este) && not vacia()){
+		MoverT(Norte,Este)
+		}
+	return( not vacia() )
+}
+
+/* */
+procedure IrASiguienteVacia(){
+	while(puedeMoverT(Norte, Este) && not vacia()){
+		MoverT(Norte, Este)
+	}
+}
+
+program{
+  Poner(a := Rojo) // Error syntax
+	-- VaciarTablero()
+	IrAlInicioT(Norte, Este)
+	while(haySiguienteVacia()){
+		IrASiguienteVacia()
+	}
+
+}

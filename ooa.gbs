@@ -1,0 +1,11 @@
+/* Hola */
+procedure Hola(){
+	Mover(Norte)
+}
+function sigue(d){
+	return(siguiente(d))
+}
+
+program{
+	return (siguiente(siguiente(Norte)))
+}

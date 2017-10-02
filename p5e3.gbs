@@ -1,0 +1,97 @@
+
+
+procedure PintarConColorHacia(c, d){
+	Poner(c)
+	while( puedeMover(d) ) {
+		Mover(d)
+		Poner(c)
+	}
+}
+
+/* Recibe dos direcciones d1 y d2 y mueve el cabezal al inicio del recorrido. En otras palabras, el cabezal se mueve al extremo opuesto(d1) + opuesto(d2) */
+procedure IrAlInicioT(d1, d2){
+	IrAlExtremo(opuesto(d1))
+	IrAlExtremo(opuesto(d2))
+}
+
+function puedeMoverT(d1, d2){
+	return ( puedeMover(d1) || puedeMover(d2) )
+}
+
+/* Precondicion: debe haber una celda en direccion d2 o d1 */
+procedure MoverT(d1, d2){
+	if (puedeMover(d1)){
+		Mover(d1)
+	}else{
+		IrAlExtremo(opuesto(d1))
+		Mover(d2)
+	}
+}
+
+procedure PintarTablero(c){
+	IrAlInicioT(Este, Norte)
+	while (puedeMoverT(Este, Norte)){
+		Poner(c)
+		MoverT(Este, Norte)
+	}
+	Poner(c)
+}
+
+function hayBolitasEnFila(c){
+	IrAlExtremo(Oeste)
+	IrHastaColor(c, Este)
+	return (hayBolitas(c))
+}
+
+function hayBolitasEnTablero(c){
+	IrAlInicioT(Sur, Oeste) // No va a SO va al opuesto, NE
+	while ( puedeMoverT(Sur, Oeste) && not hayBolitas(c)) {
+		MoverT(Sur, Oeste)
+	}
+	return (hayBolitas(c))
+}
+procedure PintarFila(c){
+	IrAlExtremo(Oeste)
+	PintarConColorHacia(c, Este)
+}
+
+procedure DegradarFila(c, n){
+	IrAlExtremo(Oeste)
+	while ( puedeMover(Este) ){
+		DegradarCelda(n, c)
+		Mover(Este)
+	}
+	DegradarCelda(n, c)
+}
+
+procedure DegradarTablero(n, c){
+	IrAlInicioT(Este, Norte)
+	while (puedeMoverT(Este, Norte)){
+		DegradarCelda(n, c)
+		MoverT(Este, Norte)
+	}
+	DegradarCelda(n, c)
+}
+
+procedure PonerEnVacias(c){
+	IrAlInicioT(Norte, Este) // Va al contrario
+	while ( puedeMoverT(Norte, Este)  ) {
+		PonerSi(c, vacia() )
+		MoverT(Norte, Este)
+	}
+	PonerSi(c, not hayBolitas(c))
+}
+
+/* posicione el cabezal en el origen del tablero. */
+procedure IrAlOrigen(){
+	IrAlExtremo(Oeste)
+	IrAlExtremo(Sur)
+}
+
+
+program{
+	PonerEnVacias(Rojo)
+	IrAlOrigen()
+}
+
+

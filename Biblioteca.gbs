@@ -1,0 +1,240 @@
+--  JCFS Biblioteca
+procedure PonerN(veces, color){
+/* Proposito:: Colocar "veces" bolitas de color "color" en la celda actual. (ref p3 e11)
+	precondiciones: no tiene.
+	param: veces denota un numero. color denota un color.*/
+  repeat(veces){
+		Poner(color);
+	}
+}
+
+procedure PonerNAl(color, numero, dir){
+	/* Pone "numero" bolitas de color "color" en la celda lindante en direccion "dir" dejando el cabezal en la celda actual (ref:p3 e20) 
+	precondicion: debe haber tantas celdas como indica "numero" en al "direccion"
+	param: color denota color, numero denota un numero y dir denota una direccion */
+	Mover(dir)
+	repeat(numero){
+		Poner(color)
+	}
+	Mover(opuesto(dir))
+}
+
+procedure PonerSi(color, b){
+/* Dado un color "color" y un booleano b, pone una bolita de color c en la celda actual si b es True, y no hace nada si este es False. (ref: p4 e13) */
+	if (b){
+		Poner(color)
+	}
+}
+
+procedure PonerTodosLosColores(){
+	/* Deposita una bolita de cada color en la celda actual. (ref: p3 e15)
+	precondicion: no tiene
+	param: no tiene. */
+	foreach color in [minColor()..maxColor()]{
+		Poner(color)
+	}
+}
+procedure SacarN(color, veces){
+/* Proposito:: Saca "veces" bolitas de color "color" en la celda actual. (ref: p3 e12)
+   Precondicion: Debe haber "veces" bolitas color "color" en la celda actual */
+  repeat(veces){
+		Sacar(color);
+	}
+}
+
+procedure SacarSi(color, condicion){
+	/* Saca una bolita de color "color" si se cumple la condicion "condicion". (ref: p4 e14)
+	precondicion: Debe haber una bolita de color "color". 
+	param: color denota un color y condicion denota un booleano. */
+	if (condicion){
+		Sacar(color)
+	}
+}
+
+procedure MoverN(direccion, numero){
+	/* Mueve el cabezal "numero" celdas al "direccion". 
+   Deben haber "numero" celdas en direccion "direccion" */
+	repeat(numero){
+		Mover(direccion)
+	}
+}
+
+procedure MoverSi(direccion, condicion){
+	/* Mueve el cabezal en doreccion "direccion" si se cumple la condicion "condicion" 
+	precondicion: debe haber una celda al "direccion" 
+	param: direccion denota una direccion. condicion denota un booleano */
+	if (condicion){
+		Mover(direccion)
+	}
+}
+
+procedure SacarTodas(color){
+	/* Saca todas las bolitas de color "color" de la celda actual (ref: p3 e13)
+	precondicion: no tiene
+	param: color denota un color */
+	SacarN(color, nroBolitas(color))	
+}
+
+/* Pinta una linea "color" en al "direccion" de largo "numero"
+	precondicion: debe haber "numero celdas al "direccion" de la celda actual
+	param: color denota un color. numero denota un numero. direccion denota una direccion */
+procedure LineaNAl(color, numero, direccion){
+	repeat(numero){
+		Mover(direccion)
+		Poner(color)
+	}
+}	
+
+procedure CopiarBolitasCAl(color, dir){
+/* Proposito: copia las bolitas de color "color" a la celda lindante en direccion "dir". El cabezal queda en la celda actual */  
+	repeat(nroBolitas(color)){
+		Mover(dir)
+		Poner(color)
+		Mover(opuesto(dir))
+	}
+}
+
+/* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
+ Precondicion: Una celda en direccion "dir" 
+ param: dir denota una direccion */
+procedure CopiarCeldaAl(dir){
+	foreach color in [minColor()..maxColor()]{
+		PonerNAl(color, dir, nroBolitas(color))
+	}
+}
+
+
+/* Quita "deg" cantidad de bolitas de color "c" si hay mas de "deg" de bolitas de color "c",  si no saca todas las de este color */
+procedure DegradarCelda(deg, c){
+	if (nroBolitas(c) > deg){
+		SacarN(c, deg)
+	} else {
+		SacarTodas(c)
+	}
+}
+
+
+/* Chequea si la celda actual esta vacia, es decir de ningun color. retorna True si lo esta
+ precondicion: no tiene
+ param: no tiene */
+function vacia(){
+	return (not ( hayBolitas(Azul) || hayBolitas(Negro) || hayBolitas(Rojo) || hayBolitas(Verde) ) )
+}
+
+/* Mueve el cabezal hasta la primer celda color c desde la celda actual hasta el borde en direccion d. Si No encuentra celda con el color c y el cabezal queda en la celda mas al "d" desde la celda actual (ref p6 e3)
+ precondicion: no tiene
+ param: c denota un color y de denota una direccion */
+procedure IrHastaColor(c, d){
+	while ( puedeMover(d) && not hayBolitas(c)){
+		Mover(d)
+	}
+}
+
+/* Lleva el cabezal al extremo de la fila (Este u Oeste) o columna (Sur o Norte)
+ precondicion: no tiene
+ param: d denota una direccion */
+procedure IrAlExtremo(d){
+	while ( puedeMover(d) ) {
+		Mover(d)
+	}
+}
+
+/* Recibe dos direcciones d1 y d2 y mueve el cabezal al inicio del recorrido. En otras palabras, el cabezal se mueve al extremo opuesto(d1) + opuesto(d2)  (ref: p6 e10)
+ precondicion: no tiene 
+ param: d1 y d2 denotan direcciones (opuestas a lo esperado)*/
+procedure IrAlInicioT(d1, d2){
+	IrAlExtremo(opuesto(d1))
+	IrAlExtremo(opuesto(d2))
+}
+
+/* Posiciona el cabezal en el origen del tablero (ref: p6 e6)
+	precondicon: no tiene 
+	param: no tiene */
+procedure IrAlOrigen(){
+	IrAlExtremo(Oeste)
+	IrAlExtremo(Sur)
+}
+function puedeMoverT(d1, d2){
+	return ( puedeMover(d1) || puedeMover(d2) )
+}
+
+/* Precondicion: debe haber una celda en direccion d2 o d1 */
+procedure MoverT(d1, d2){
+	if (puedeMover(d1)){
+		Mover(d1)
+	}else{
+		IrAlExtremo(opuesto(d1))
+		Mover(d2)
+	}
+}
+/* retorna el valor en valueTrue si se cumple la condicion bool como verdadra, en caso contrario devuelve el valor en valueFalse */
+function ifElse(bool, valueTrue, valueFalse
+){
+	value := valueFalse
+	if (bool){
+		value := valueTrue
+	}
+	return (value)
+}
+
+procedure IrANesimaVacia(n){
+	/* Mueve el cabezal hasta la n esima celda vacia del tablero respecto a la celda inicial (Sur-Oeste) y recorriendo el tablero en direccion Noret Este, si no la encuentra queda en la ultima */ 
+	vacias_vistas := 0
+	IrAlInicioT(Norte, Este)
+	vacias_vistas := ifElse(vacia(), vacias_vistas + 1, vacias_vistas)
+	while ( puedeMoverT(Norte, Este) && n /= vacias_vistas ){
+		MoverT(Norte,Este)
+		vacias_vistas := ifElse(vacia(), vacias_vistas + 1, vacias_vistas)
+	}
+}
+
+function menor(v1, v2){
+	/* proposito: denota el menor valor entre v1 y v2.
+	precond: v1 y v2 deben denotar el mismo tipo de valores 
+	param: v1 y v2 valores a comparar. */
+	menor := v1
+	if (v1 > v2){
+		menor := v2
+	}
+	return (menor)
+}
+
+function mayor(v1, v2){
+	/* proposito: denota el mayor valor entre v1 y v2.
+	precond: v1 y v2 deben denotar el mismo tipo de valores 
+	param: v1 y v2 valores a comparar. */
+	mayor := v1
+	if (v1 < v2){
+		mayor := v2
+	}
+	return (mayor)
+}
+
+/* Limpia la Celda actual 
+ precondicion: no tiene 
+ param: no tiene */
+procedure LimpiarCelda(){
+	foreach c in [minColor()..maxColor()]{
+		SacarTodas(c)
+	}
+}
+	
+/* Limpia el Tablero . Usa la funcion LimpiarCelda() 
+	precondiciones: no tiene
+	param: no tiene */
+procedure LimpiarTablero(){
+	IrAlInicioT(Norte, Este)
+	while (puedeMoverT(Norte, Este)){
+		LimpiarCelda()
+		MoverT(Norte, Este)
+	}
+	LimpiarCelda()
+}
+
+function nroBolitasAl(c, dir){
+	Mover(dir)
+	return(nroBolitas(c))
+}
+
+	
+

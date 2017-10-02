@@ -1,0 +1,6 @@
+program{
+	if (puedeMover(Oeste) || puedeMover(Sur) && puedeMover(Este)) {
+		Poner(Rojo)
+	}
+}
+
