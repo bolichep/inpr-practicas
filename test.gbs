@@ -13,12 +13,39 @@ procedure IrASiguienteVacia(){
 	}
 }
 
+/* rota el color de la bolita a siguiente, debe haber una bolita */
+procedure RotarColorBolita(){
+	foreach color in [minColor()..maxColor()]{
+		if (nroBolitas(color) /= 0){
+			Sacar(color)
+			Poner(previo(color))
+		}
+	}
+}
+
+procedure RotarColorAdy(){
+	foreach dir in [minDir()..maxDir()]{
+		Mover(dir)
+		RotarColorBolita()
+		Mover(siguiente(dir))
+		RotarColorBolita()
+		Mover(opuesto(siguiente(dir)))
+		Mover(opuesto(dir))
+	}	
+}
+
 program{
-  Poner(a := Rojo) // Error syntax
+  -- Poner(a := Rojo) // Error syntax
 	-- VaciarTablero()
+	-- CopiarCeldaAAdyacentes()
+	RotarColorAdy()
 	IrAlInicioT(Norte, Este)
 	while(haySiguienteVacia()){
 		IrASiguienteVacia()
 	}
-
+	SacarTodas(Rojo)
+	foreach color in [minColor()..maxColor()]{
+		Poner(color)
+		Mover(Norte)
+		}
 }
