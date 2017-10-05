@@ -96,12 +96,31 @@ procedure CopiarBolitasCAl(color, dir){
 
 /* Proposito: Copia las bolitas de la celda actual a la lindante en direccion "dir" 
  Precondicion: Una celda en direccion "dir" 
- param: dir denota una direccion */
+ param: dir denota una direccion (ref: p3 e20)*/
 procedure CopiarCeldaAl(dir){
 	foreach color in [minColor()..maxColor()]{
-		PonerNAl(color, dir, nroBolitas(color))
+		PonerNAl(color, nroBolitas(color), dir)
 	}
 }
+
+/*Proposito: copiar la celda actual a las cuatro lindantes
+  Precondicion: debe haber celdas lindantes a la actual en los cuatro sentidos (ref: p3 e21)*/
+procedure CopiarCeldaALindantes(){
+	foreach dir in [minDir()..maxDir()]{
+		CopiarCeldaAl(dir)
+	}
+}
+/* Proposito: Copia la celada actual a las ocho adyacentes
+  Precondicion: debe haber celdas lindantes a la actual en los cuatro sentidos (ref: p3 e22)*/
+procedure CopiarCeldaAAdyacentes(){
+	foreach dir in [minDir()..maxDir()]{
+		CopiarCeldaAl(dir)
+		Mover(dir)
+		CopiarCeldaAl(siguiente(dir))
+		Mover(opuesto(dir))
+	}
+}
+	
 
 
 /* Quita "deg" cantidad de bolitas de color "c" si hay mas de "deg" de bolitas de color "c",  si no saca todas las de este color */
@@ -168,8 +187,7 @@ procedure MoverT(d1, d2){
 	}
 }
 /* retorna el valor en valueTrue si se cumple la condicion bool como verdadra, en caso contrario devuelve el valor en valueFalse */
-function ifElse(bool, valueTrue, valueFalse
-){
+function ifElse(bool, valueTrue, valueFalse){
 	value := valueFalse
 	if (bool){
 		value := valueTrue
@@ -212,7 +230,7 @@ function mayor(v1, v2){
 
 /* Limpia la Celda actual 
  precondicion: no tiene 
- param: no tiene */
+ param: no tiene (ref: p3 e16)*/
 procedure LimpiarCelda(){
 	foreach c in [minColor()..maxColor()]{
 		SacarTodas(c)
