@@ -1,0 +1,63 @@
+function hayPistaSinMarcarHacia(energia, dir){
+  pot := energia
+	while( puedeMover(dir) && not ( hayPista() && not hayMarca() ) && pot > 0 ){
+		Mover(dir)
+		pot := pot - 1
+	}
+	return(hayPista() && not hayMarca() )
+} 
+
+function hayPistaSinMarcarEnEntorno(energia){
+	hay := False
+	foreach dir in [minDir()..maxDir()]{
+		hay := hay || hayPistaSinMarcarHacia(energia, dir)
+	}
+	return (hay)
+}
+
+
+function direccionPistaSinMarcar(energia){
+	dir := minDir()
+	while ( not hayPistaSinMarcarHacia(energia, dir) ){
+		dir := siguiente(dir)
+	}
+	return (dir)
+}	
+
+function hayPista(){	return(hayBolitas(Verde))}
+function hayHeno() {	return(hayBolitas(Azul)) }
+function hayMarca(){	return(hayBolitas(Negro))}
+function esSalida(){	return(hayBolitas(Rojo)) }
+
+function energiaHeno(){	return (2) }
+
+function meta(cond, valor){
+	retail := valor + energiaHeno()
+	if (not cond){
+		retail := retail - 1
+	}
+	return (retail)
+}
+	
+
+procedure Caminar(){
+	energia := 4
+--	while ( not esSalida() && energia > 0 && hayPistaSinMarcarEnEntorno(energia) ){
+	while ( not esSalida() && energia > 0  ){
+		Poner(Negro)
+		// Buscar dir Pista
+		dir := direccionPistaSinMarcar(energia)
+		-- dir := Norte
+		// chequear Henos
+		energia := meta( hayHeno(), energia)
+		-- energia := ifElse(hayHeno(), energiaHeno() + energia, energia - 1)
+		//
+		Mover(dir)
+	}
+	PonerN(energia + 100, Azul)
+}
+
+program{
+	Caminar()
+	return ( direccionPistaSinMarcar(-1), hayPistaSinMarcarEnEntorno(-1) )
+}
