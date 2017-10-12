@@ -254,5 +254,7 @@ function nroBolitasAl(c, dir){
 	return(nroBolitas(c))
 }
 
-	
+function singularSi(bool, elemento){
+  return ( ifElse(bool, [elemento], []) )
+}
 
