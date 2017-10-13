@@ -1,0 +1,111 @@
+
+function p(cant){
+  return([1..cant])}
+
+function esSingular(lista){
+  return(not isEmpty(lista) && isEmpty(tail(lista)))
+}
+
+function direccionesAlBorde(){
+  lista := []
+  foreach dir in [minDir()..maxDir()]{
+    if (not puedeMover(dir)){
+      lista := lista ++ [dir]
+    }
+  }
+  return(lista)
+}
+
+function coloresCelda(){
+  lista := []
+  foreach col in [minColor()..maxColor()]{
+    lista := lista ++ singularSi(hayBolitas(col), col)
+  }
+  return(lista)
+}
+
+/* Escribir el procedimiento PonerLista que, dada una lista de colores [c 1 , c 2 , c 3 , . . . , c k ], ponga
+en la celda actual una bolita de color c i por cada i = 1, 2, 3, . . . , k.
+Ejemplo: PonerColores([minColor(), Verde, maxColor()]) pone dos bolitas Verdes y una
+Azul. p8 e4 */ 
+procedure PonerLista(ls){
+  foreach col in ls {
+    Poner(col)
+  }
+}
+
+function sublistaHasta(ls, n){
+  sublista := []
+  lista := ls
+  repeat (n){
+    sublista := sublista ++ [head(lista)]
+    lista := tail(lista)
+  }
+  return (sublista)
+}
+
+function hasta(ls, e){
+  sublista := []
+  lista := ls
+  while (head(lista) /= e) {
+    sublista := sublista ++ [head(lista)]
+    lista := tail(lista)
+  }
+  return (sublista)
+}
+/*
+esquema Recorrido(lista){
+  ls := lista
+  while (not isEmpty(ls)){
+    Procesar(head(ls))
+    ls := tail(ls)
+  }
+}
+
+esquema Busqueda(lista){
+  ls := lista
+  while ( not encontre(head(ls))){
+    ls := tail(ls)
+
+  }
+}
+*/
+
+/* Recorre el camino indicado en los elementos de la lista ls.
+   Prec: Deben haber celdas en el camino indicado en ls */
+procedure RecorrerCamino(ls){
+  foreach dir in ls {
+    Mover(dir)
+  }
+}
+
+/* Crea una lista con el numero de apariciones del color c en cada celda del tablero 
+ p8 e6 */
+function aparicionesDeColor(c){
+  IrAlInicioT(Norte, Este)
+  lista := []
+  while(puedeMoverT(Norte, Este)){
+    lista := lista ++ [nroBolitas(c)]
+    MoverT(Norte, Este)
+  }
+
+  return (lista ++ [nroBolitas(c)])
+}
+
+/* Crea una lista con el numero de apariciones en el recorrido descripto en la lista ds del color c 
+ prec: debe poder moverse el cabezal sobre el recorrido descripto en la lista ds */
+function apraricionesDeColorEnRecorrido(c, ds){
+  lista := []
+  foreach dir in ds{
+    lista := lista ++ [nroBolitas(c)]
+    Mover(dir)
+  }
+  return(lista ++ [nroBolitas(c)])
+}
+
+
+program{
+  lista := p(5)
+  -- RecorrerCamino([Norte, Este, Norte, Este, Norte, Este])
+  return(apraricionesDeColor(Rojo), lista, hasta([Azul, Rojo, Verde], Verde), sublistaHasta(lista, 2), coloresCelda(), head(lista), tail(lista), last(lista), init(lista), direccionesAlBorde())
+}
