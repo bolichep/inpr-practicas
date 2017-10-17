@@ -1,0 +1,112 @@
+-- denota una lista con n repeticiones de x. si n <=0 retorna una lista vacia e9
+function repeticion(n , x){
+  lista := []
+  repeat(n){
+    lista := lista ++ [x]
+    }
+  return (lista)
+}
+
+-- denota la suma de todos los numeros de una lista e10
+-- 
+function sumatoria(ls){
+  sumatoria := 0
+  foreach n in ls{
+    sumatoria := sumatoria + n
+  }
+  return (sumatoria)
+}
+
+-- denota la lista dada invertida e11
+function reverso(ls){
+  lista_salida := []
+  foreach elemento in ls{
+    lista_salida := [elemento] ++ lista_salida
+  }
+  return(lista_salida)
+}
+
+-- denota la longitud de la lista e12
+function longitud(lista_entrada){
+  longitud := 0
+  foreach elemento in lista_entrada{
+    longitud := longitud + 1
+  }
+  return(longitud)
+}
+
+-- denota una lista con los elementos opuestos de la lista de entrada e13
+-- prec: la lista_entrada debes ser del tipo numero o direccion
+function opuestos(lista_entrada){
+  lista_salida := []
+  foreach elemento in lista_entrada{
+    lista_salida := lista_salida ++ [opuesto(elemento)]
+  }
+  return(lista_salida)
+}
+
+-- denota una lista ,que dada  ls y un numero m, con los elementos de la lista original m veces e14
+function multiplicacionLista(ls, m){
+  lista_salida := []
+  repeat(m){
+    lista_salida := aniadir(lista_salida, ls)
+  }
+  return(lista_salida)
+}
+
+-- denota la lista_entrada con los elementos de ls añadidos
+function aniadir(lista_entrada, ls){
+  lista_salida := lista_entrada
+    foreach elemento in ls{
+      lista_salida := lista_salida ++ [elemento]
+    }
+  return(lista_salida)
+}
+
+-- denota una lista en que cada elemento de lista_entrada aparece repetido m veces e15
+function multiplicacionInterna(lista_entrada, m){
+  lista_salida := []
+  foreach elemento in lista_entrada{
+    lista_salida := lista_salida ++ repeticion(m, elemento)
+  }
+  return(lista_salida)
+}
+
+-- denota 
+/* e16
+Escribir la función sumatoriaVecinos que, dada una lista ns = [n 1 , . . . , n k ], retorne la lista ms = [m 2 , . . . , m k−1 ] tal que m i es la suma de n i−1 , n i y n i+1 .  Ejemplo: sumatoriaVecinos([1, 2, 3, 4]) retorna [6, 9] (i.e. [1+2+3, 2+3+4]). Notar que ms tiene dos elementos menos que ns.
+*/
+--prec : la lista debe ser del tipo numeros
+
+function sumatoriaVecinos(ns){
+  ms := []
+  lista := ns
+  repeat(longitud(ns)-2){
+    ms := ms ++ [sumatoria(vecinos(lista))]
+    lista := tail(lista)
+  }
+  return(ms)
+}
+
+-- denota una lista con los tres primeros elementos de la lista ls
+-- prec : la lista debe tener al menos tres elementos
+function vecinos(ls){
+  return([head(ls)] ++ [head(tail(ls))] ++ [head(tail(tail(ls)))] )
+}
+
+-- denota una lista con los elementos de ls pero sin e entre sus elementos e17
+function sinElemento(ls, e){
+  lista_salida := []
+  foreach elemento in ls{
+    lista_salida := lista_salida ++ ifElse(elemento==e, [], [elemento])
+  }
+  return(lista_salida)
+}
+
+-----
+program{
+  lista := [1, 2, 5, 9, 4 , 5 , 6, 7, 8, 5]
+  -- lista := [Rojo, Negro, Azul]
+  return (lista, sinElemento(lista, 5))
+}
+
