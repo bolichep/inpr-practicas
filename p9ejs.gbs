@@ -91,7 +91,7 @@ function sumatoriaVecinos(ns){
 -- denota una lista con los tres primeros elementos de la lista ls
 -- prec : la lista debe tener al menos tres elementos
 function vecinos(ls){
-  return([head(ls)] ++ [head(tail(ls))] ++ [head(tail(tail(ls)))] )
+	return([head(ls)] ++ [head(tail(ls))] ++ [head(tail(tail(ls)))] )
 }
 
 -- denota una lista con los elementos de ls pero sin e entre sus elementos e17
@@ -103,10 +103,225 @@ function sinElemento(ls, e){
   return(lista_salida)
 }
 
+
+-- denota una lista con los numeros pares en la lista de entrada p9 e18
+function pares(ls){
+	lista_salida := []
+	foreach n in ls{
+		lista_salida := lista_salida ++ ifElse(esPar(n), [n], [])
+	}
+	return (lista_salida)
+}
+
+-- denota un booleano indicando si el numero ingresado es par auxiliar ej18
+function esPar(n){
+	return( (n mod 2 == 0) )
+}
+
+-- denota la lista resultante de quitar todos los numero internos e19
+function reduccionBloques(ls){
+	lista_salida := [head(ls)]
+	foreach n in ls{
+		lista_salida := lista_salida ++ ifElse(n /= last(lista_salida), [n], [])
+	}
+	return(lista_salida)
+}
+
+-- denota una lista con los elementos de ambas listas de entrada intercalados e20
+-- prec: ambas listas deben tener la misma longitud y el mismo tipo
+function zipI(ls1, ls2){
+	lista1 := ls1
+	lista_salida := []
+	foreach e in ls2{
+		lista_salida := lista_salida ++ [head(lista1)] ++ [e]
+		lista1 := tail(lista1)
+	}
+	return(lista_salida)
+}
+
+-- denota una lista con los elementos de ambas listas de entrada intercalados e21
+-- prec: ambas listas deben tener  el mismo tipo 
+function zip(ls1, ls2){
+	lista1 := ls1
+	lista2 := ls2
+	lista_salida := []
+	while (not isEmpty(lista1) || not isEmpty(lista2)) {
+		if (not isEmpty(lista1)){
+			lista_salida := lista_salida ++ [head(lista1)]
+			lista1 := tail(lista1)
+		}
+		if (not isEmpty(lista2)){
+			lista_salida := lista_salida ++ [head(lista2)]
+			lista2 := tail(lista2)
+		}
+
+	}
+	return(lista_salida)
+}
+
+-- e22 denota una lista sin los elementos en posiciones pares
+function unzipPares(ls){
+	lista_salida := []
+	lista_entrada := ls
+	while (not isEmpty(lista_entrada)){
+		lista_salida := lista_salida ++ [head(lista_entrada)]
+		lista_entrada := tail(lista_entrada)
+		lista_entrada := ifElse(not isEmpty(lista_entrada), tail(lista_entrada), [])
+	}
+	return(lista_salida)
+}
+
+-- Ej Adicionales
+-- denota bool en tanto el elemento e pertenesca a la lista xs e23
+function pertenece(e, ls){
+	pertenece := False
+	foreach elemento in ls{
+		pertenece := pertenece || (elemento == e)
+	} 
+	return (pertenece)
+}
+
+-- denota una lista sin elementos repetidos desde la lista ls e24
+function sinDuplicados(ls){
+	lista_salida := []
+	foreach e in ls{
+		lista_salida := lista_salida ++ ifElse(pertenece(e, lista_salida), [], [e]) 
+	}
+	return(lista_salida)
+}
+
+-- denota la lista union de dos listas que contienen todos los elementos no repetidos que aparecen en alguno de ls o ms e25
+-- prec: ls y ms son listas sin elementos repetidos (???)
+function union(ls, ms){
+	return ( sinDuplicados(ls ++ ms) )
+}
+
+-- denota la interseccion de dos listas que no contienen elementos repetidos, esto es los todos los elementos que aparesen tanto en ls como en ms e26
+-- prec: ls y ms son listas sin elementos repetidos 
+function interseccion(ls, ms){
+	lista_salida := []
+	foreach e in ls{
+		lista_salida := lista_salida ++ ifElse(pertenece(e, ms), [e], [])
+	}
+	return (lista_salida)
+}
+
+-- incluye e27, denota bool si una lista se encuentra contenida en la primera
+function incluye(xs, ys){
+	incluye := True
+	foreach e in ys{
+		incluye := incluye && pertenece(e, xs)
+	}
+	return (incluye)
+	-- return ( interseccion(xs, ys) == ys ) -- esto no funca si el orden de la lista no es el mismo... obvio
+}
+
+-- denota bool si la lista esta ordenada de menor a mayor e28
+-- prec: la lista no debe estar vacia
+function ordenada(ls){
+	lista_entrada := tail(ls)
+	elemento := head(ls)
+	while ( not isEmpty(lista_entrada) && elemento < head(lista_entrada)){
+		elemento := head(lista_entrada)
+		lista_entrada := tail(lista_entrada)
+	}
+	return( isEmpty(lista_entrada) )
+}
+
+-- denota el minimo elemento de la lista entrada e29
+-- prec: ???
+function minimo(ls){
+	menor := head(ls)
+	foreach e in ls{
+		menor := ifElse(menor > e, e, menor)
+	}
+	return(menor)
+}
+
+-- e30 denota la lista de entrada sin la primer aparicion del minimo de la lista
+function sacarMinimo(ls){
+	return( sinPrimerAparicion(ls, minimo(ls)))
+}
+
+-- e30 secundaria sin primera aparicion
+-- denota la lista sin la primera aparicion de e
+function sinPrimerAparicion(ls, e){
+	lista_entrada := ls
+	lista_salida := []
+	while (head(lista_entrada) /= e){
+		lista_salida := lista_salida ++ [head(lista_entrada)]
+		lista_entrada := tail(lista_entrada)
+	}
+	return( lista_salida ++ tail(lista_entrada))
+}
+
+-- e31 denota la lista dada ordenada de menor a mayor
+function ordenacion(ls){
+	lista_salida := []
+	lista_entrada := ls
+	while (not isEmpty(lista_entrada)){
+		lista_salida := lista_salida ++ [minimo(lista_entrada)]
+		lista_entrada := sacarMinimo(lista_entrada)
+	}
+	return(lista_salida)
+}
+
+
+-- e32 denota una lista de listas que agrupa los elementos de xs en grupos de n elementos
+function agrupar(xs, n){
+	lista_entrada := xs
+	lista_salida := []
+	while (not isEmpty(lista_entrada) ){
+		lista_particion := partir(lista_entrada, n)
+		lista_cabeza := head(lista_particion)
+		lista_salida := lista_salida ++ [lista_cabeza]
+		lista_entrada := last(lista_particion)
+	}	
+	return (lista_salida)
+}
+
+-- denota una lista con dos listas , la primera con los n primeros elementos de la lista dada si no tiene los elementos denotas tantos como pueda la segunda con el remanente de la lista original depues de quitarle los n primeros elementos
+function partir(ls, n){
+	lista_entrada := ls
+	lista_salida := []
+	while (not isEmpty(lista_entrada) && longitud(lista_salida) /= n){
+		lista_salida := lista_salida ++ [head(lista_entrada)]
+		lista_entrada := tail(lista_entrada)
+	}
+	return([lista_salida, lista_entrada])
+}
+
+
+-- e33 denota la concatenacion de los elementos en las listas de las lista dada
+-- prec: xs debe no ser vacia
+function desagrupar(xs){
+	lista_salida := head(xs)
+	foreach lista in tail(xs){
+		lista_salida := concatenar(lista_salida, lista)
+	}
+	return (lista_salida)
+}
+
+-- denota una lista con los elementos de ambas listas
+function concatenar(ls,ms){
+	lista_salida := ls
+	foreach e in ms{
+		lista_salida := lista_salida ++ [e]
+	}
+	return (lista_salida)
+}
 -----
 program{
-  lista := [1, 2, 5, 9, 4 , 5 , 6, 7, 8, 5]
+	
+  lista1 := [1, 2, 5, 9, 4, 6, 7]
+  lista2 := [3, 5, 7, 9, 1, 8, 12, 23, 34]
+  lista3 := [3, 5, 7, 9]
   -- lista := [Rojo, Negro, Azul]
-  return (lista, sinElemento(lista, 5))
+	
+  return ( lista1, desagrupar(agrupar(lista1,3)), lista2, desagrupar(agrupar(lista2,3)), lista3, desagrupar(agrupar(lista3,3) ),
+	desagrupar([[1,2,3],[4,5,6],[7,8,9]]), --retorna [1,2,3,4,5,6,7,8,9].
+	desagrupar(agrupar([2,3,4,5,6],2)) -- retorna [2,3,4,5,6].
+	)
+
 }
 

@@ -94,7 +94,7 @@ function aparicionesDeColor(c){
 
 /* Crea una lista con el numero de apariciones en el recorrido descripto en la lista ds del color c 
  prec: debe poder moverse el cabezal sobre el recorrido descripto en la lista ds */
-function apraricionesDeColorEnRecorrido(c, ds){
+function aparicionesDeColorEnRecorrido(c, ds){
   lista := []
   foreach dir in ds{
     lista := lista ++ [nroBolitas(c)]
@@ -103,9 +103,19 @@ function apraricionesDeColorEnRecorrido(c, ds){
   return(lista ++ [nroBolitas(c)])
 }
 
+-- pone n bolitas de color c desde las listas listaN y listaC PonerListaN(listaC, listaN) p9 ej8
+-- prec: las listas pasadas deben tener la misma longitud
+procedure PonerListaN(listaC, listaN){
+	lista := listaC
+	foreach n in listaN{
+		PonerN(head(lista), n)
+		lista := tail(lista)
+	}
+}
 
 program{
   lista := p(5)
+	PonerListaN([1,2,3,4],[minColor()..maxColor()])
   -- RecorrerCamino([Norte, Este, Norte, Este, Norte, Este])
   return(apraricionesDeColor(Rojo), lista, hasta([Azul, Rojo, Verde], Verde), sublistaHasta(lista, 2), coloresCelda(), head(lista), tail(lista), last(lista), init(lista), direccionesAlBorde())
 }
