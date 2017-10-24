@@ -564,11 +564,48 @@ function comprimir0(imagenData){
 	return (i_comprimida ++ [[[last_count], last_color]])
 }
 
+ -- denota la longitud de la lista e12
+function longitud(lista_entrada){
+  longitud := 0
+  foreach elemento in lista_entrada{
+    longitud := longitud + 1
+  }
+  return(longitud)
+}
+
+
+-- denota una lista con los elementos agrupados por valor es decir de 
+-- [a,a,a,b,b,c,b,b,a] denota [[a,a,a],[b,b],[c],[b,b],[a]]	
+function z1(lista){
+  acumulador := [head(lista)]
+	lista_entrada := tail(lista)
+
+	while ( not isEmpty(lista_entrada) && head(lista_entrada) == last(acumulador) ) {
+		acumulador := acumulador ++ [ head(lista_entrada) ]
+		lista_entrada := tail(lista_entrada)
+	}
+
+	return ([acumulador,lista_entrada])
+}
 
 function comprimir(imagenData){
-	[a,a,a,b,b,c,b,b,a]
-	[[a,a,a],[b,b],[c],[b,b],[a]]	
-	[[a],[b],[c],[b],[a]]
+--	[a,a,a,b,b,c,b,b,a]
+	lista_entrada := imagenData
+	lista_salida := []
+	while (not isEmpty(lista_entrada)) {
+		lista := z1(lista_entrada)
+		lista_entrada := head(tail(lista))
+		lista_salida := lista_salida ++ [ head(lista) ]
+	} 
+
+--	[[a,a,a],[b,b],[c],[b,b],[a]]
+	lista_salida2 := []	
+	foreach e in lista_salida {
+		lista_salida2 := lista_salida2 ++ [[ [longitud(e)] , head(e) ]]
+	}
+  
+--	[[a],[b],[c],[b],[a]]
+  	return (lista_salida2)
 }
 
 program {
