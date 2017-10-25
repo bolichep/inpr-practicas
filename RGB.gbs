@@ -607,31 +607,76 @@ function comprimir(imagenData){
 --	[[a],[b],[c],[b],[a]]
   	return (lista_salida2)
 }
-
+/*
 program {
 	return(comprimir(imagen1()), imagen1_comprimida(), comprimir(imagen1()) == imagen1_comprimida())
 }
 --*/
+-- denota una lista con n repeticiones de x. si n <=0 retorna una lista vacia e9
+function repeticionpixeles(n , x){
+  lista := []
+  repeat(n){
+    lista := lista ++ x
+    }
+  return (lista)
+}
+
+
+function descomprimir(imageData){
+	-- [[[3],[1,1,1,0]], [[2], [0,0,0,1]]]
+	lista_salida := []
+	foreach comp_token in imageData{
+		lista_salida := lista_salida ++ repeticionpixeles (head(head(comp_token)),  tail(comp_token) )
+	}
+	return(lista_salida)
+
+}
 /*
 program {
-	return(descomprimir(imagen1_comprimida()) == imagen1())
+	return(descomprimir(imagen1_comprimida()), imagen1(), descomprimir(imagen1_comprimida()) == imagen1())
 }
-*/
+--*/
 
 -- Ejercicio 6
+function tamanho(imageData){
+	return (longitud(imageData))
+}
 /*
 program {
 	return(tamanho(imagen1()) == 256)
 }
-*/
+--*/
+-- Ej Adicionales
+-- denota bool en tanto el elemento e pertenesca a la lista xs e23
+function pertenece(e, ls){
+	pertenece := False
+	foreach elemento in ls{
+		pertenece := pertenece || (elemento == e)
+	} 
+	return (pertenece)
+}
+-- denota una lista sin elementos repetidos desde la lista ls e24
+function sinDuplicados(ls){
+	lista_salida := []
+	foreach e in ls{
+		lista_salida := lista_salida ++ ifElse(pertenece(e, lista_salida), [], [e]) 
+	}
+	return(lista_salida)
+}
+
+
+function cantColores(imageData){
+	return (longitud(sinDuplicados(imageData)))
+}
 /*
 program {
 	return(cantColores(imagen1()) == 7)
 }
-*/
-/*
+--*/
+/**/
+-- ordenar listaimagen, comprimir tomar los dos primeros tokens en ese orden
 program {
 	return(coloresDominantes_(imagen1()) == [c_blanco(), c_naranja()])
 }
-*/
+--*/
 
