@@ -1,0 +1,40 @@
+-- ej1 
+type Persona is record {
+  field dni // nro
+  field domicilio // nro
+  field sexo // bool True=masculino 
+  field madre // registro Persona
+}
+
+function convivientes(persona1, persona2){
+  return ( domicilio(persona1) == domicilio(persona2) )
+  }
+
+function sinAsignar(){
+  return (0)
+}
+function nacimiento(madre, sexo_nuevo){
+  return (Persona(domicilio<-domicilio(madre), sexo <- sexo_nuevo, dni <- sinAsignar(), madre<-sinAsignar()))
+}
+function registrarnacimiento(persona, dni_nuevo){
+  return (Persona(persona | dni<-dni_nuevo))
+}
+function cambiodedomicilio(persona, domicilio_nuevo){
+  return (Persona(persona | domicilio<-domicilio_nuevo))
+}
+function cambiodesexo(persona, sexo_nuevo){
+  return (Persona(persona | sexo<-sexo_nuevo))
+}
+
+program{
+  maria := Persona(dni <- 14323, domicilio <- 110, sexo<- False, madre<-1)
+  mari1 := maria
+  julia := nacimiento(maria, False)
+  juli1 := julia
+  julia := registrarnacimiento(julia, 20102)
+  maria := cambiodedomicilio(maria, 220)
+  maria := Persona(maria | sexo<-False)
+  julia := Persona(julia | madre<-maria)
+  julio := cambiodesexo(julia, True)
+  return (mari1, juli1,  maria, julia , maria == maria, maria == mari1, julio)
+}
