@@ -1,0 +1,23 @@
+type Coord is record {
+  field fila // nro x
+  field columna // nro y
+}
+
+function coord (x, y){
+  return( Coord(fila<-x, columna<-y ))
+}
+
+function coordActual(){
+  return( coord (coordenadaX(), coordenadaY()) )
+}
+
+function esMayorCoord(c1, c2){
+  return ( columna(c1)>columna(c2) || columna(c1)==columna(c1) && fila(c1)>fila(c2) )
+}
+
+program { 
+#  poner
+  return ( coordActual())}
+
+
+
