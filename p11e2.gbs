@@ -5,24 +5,25 @@ type Persona is record {
   field madre // registro Persona
 }
 
+-- denota el dni en el registro tipo Persona que se encuentre en la lista dePersonas de tipo Personas
+function dniEnCabezaDeLista(dePersonas){
+  return (dni(head(dePersonas))
+}
+
 function perteneceDNI(padron, dni){
-  ls_padron := tail(padron)
-  persona := head(padron)
-  while (dni(persona) /= dni){
+  ls_padron := padron
+  while (not isEmpty(ls_padron) || dni(head(ls_padron) /= dni){
     ls_padron := tail(ls_padron)
-    persona := head(ls_padron)
   }
-  return(dni(persona) == dni)
+  return( dni(head(ls_padron)) == dni)
 }
 
 function personaConDNI(padron, dni){
-  ls_padron := tail(padron)
-  persona := head(padron)
-  while (dni(persona) /= dni){
+  ls_padron := padron
+  while (not isEmpty(ls_padron) || dni(head(ls_padron)) /= dni){
     ls_padron := tail(ls_padron)
-    persona := head(ls_padron)
   }
-  return(persona))
+  return(head(ls_padron))
 }
 
 -- denota la primer persona con domicilio 'domicilio'
@@ -67,5 +68,3 @@ function convivientes_padron2(padron, domicilio){
   }
   return(ls_personas_con_mismo_domicilio)
 }
-
-
