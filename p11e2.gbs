@@ -1,0 +1,71 @@
+type Persona is record {
+  field dni // nro
+  field domicilio // nro
+  field sexo // bool True=masculino 
+  field madre // registro Persona
+}
+
+function perteneceDNI(padron, dni){
+  ls_padron := tail(padron)
+  persona := head(padron)
+  while (dni(persona) /= dni){
+    ls_padron := tail(ls_padron)
+    persona := head(ls_padron)
+  }
+  return(dni(persona) == dni)
+}
+
+function personaConDNI(padron, dni){
+  ls_padron := tail(padron)
+  persona := head(padron)
+  while (dni(persona) /= dni){
+    ls_padron := tail(ls_padron)
+    persona := head(ls_padron)
+  }
+  return(persona))
+}
+
+-- denota la primer persona con domicilio 'domicilio'
+-- param: padron es una lista de typo Personas
+function primerPersonaConDomicilio(padron, domicilio){
+  ls_padron := tail(padron)
+  persona := head(padron)
+  while (domicilio(persona) /= domicilio){
+    ls_padron := tail(ls_padron)
+    persona := head(ls_padron)
+  }
+  return(persona))
+}
+
+function convivientes_padron1(padron, domicilio){
+  ls_pers_mismo_dom := [ primerPersonaConDomicilio(padron, domicilio) ]
+  foreach pers in padron {
+    if (convivientes(pers, head(ls_pers_mismo_dom)) && pers /= head(ls_pers_mismo_dom)){
+      ls_pers_mismo_dom := ls_pers_mismo_dom ++ [pers]}
+  }
+  return(ls_personas_con_mismo_domicilio)
+}
+
+-----
+-- denota la sublista de la lista padron desde la primer Persona con domicilio hasta el final de la lista padron
+function padronDesdePersonaConDomicilio(padron, domicilio)
+  ls_padron := tail(padron)
+  persona := head(padron)
+  while (domicilio(persona) /= domicilio){
+    ls_padron := tail(ls_padron)
+    persona := head(ls_padron)
+  }
+  return(ls_padron)
+}
+
+function convivientes_padron2(padron, domicilio){
+  ls_pers_mismo_dom := [ primerPersonaConDomicilio(padron, domicilio) ]
+  foreach pers in padronPadronDesdePersonaConDomicilio {
+    if (convivientes(pers, head(ls_pers_mismo_dom))) {
+      ls_pers_mismo_dom := ls_pers_mismo_dom ++ [pers]
+    }
+  }
+  return(ls_personas_con_mismo_domicilio)
+}
+
+
