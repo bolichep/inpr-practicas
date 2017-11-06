@@ -38,3 +38,28 @@ program{
   julio := cambiodesexo(julia, True)
   return (mari1, juli1,  maria, julia , maria == maria, maria == mari1, julio)
 }
+
+
+type Alumno is record {
+	field persona // Persona registro
+	field legajo // nro
+	field rendidas // nro
+	field aprobadas // nro
+}
+
+function alumnoIngresante(persona, legajo){
+	return (Alumno( persona<-persona, legajo<-legajo , rendidas<-0, aprobadas<-0))
+}
+
+function materiasDesaprobadas(alumno){
+	return( rendidas(alumno) - aprobadas(alumno))
+}
+
+function cambioLegajo(alumno, legajo){
+	return(Alumno(alumno| legajo<-legajo))
+}
+
+function cambioDomicilioAlumno(alumno, domicilio){
+	return (Alumno(alumno| domicilio<-domicilio))
+}
+
