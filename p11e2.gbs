@@ -195,26 +195,110 @@ function inscripcionAlumno(curso, legajo){
 	return (Curso(curso | alumnos <- alumnos(curso) ++ [Alumno(legajo <- legajo, parciales <- [])]))
 }
 
--- 
+/*
+Curso = [Alumno] =	legajo
+										[Parcial] = tema
+																nota
+				[tema]
+*/
+
+-- denota una entrade en Parcial 
 function nuevaNotaParcial(tema, nota){
-	return (Parcial(tema <- tema, nota <-nota)
+	return (Parcial(tema <- tema, nota <-nota))
 }
 
-function nuevoParcialAlumno(alumno, parcial){
+-- denota el Alumno coinsidente con legajo de una lista de Alumnos 
+-- prec el Alumno  debe estar
+function alumnoEnLista(curso, legajo){
+  lista := alumnos(curso)
+  while ( legajo(head(lista)) /= legajo){
+    lista := tail(lista)
+    }
+  return(head(lista))
+}
+
+
+-- denota curso sin Alumno en lista alumnos
+function sinAlumnoEnLista(curso, legajo){
+  return( Curso(curso | alumnos <- sinElemento(alumnos(curso), alumnoEnLista(curso, legajo))) )
+}
+
+-- denota un Alumno con su parcial agregado
+function nuevoParcialDeAlumno(alumno, parcial){
 	return( Alumno(alumno | parciales <- parciales(alumno) ++ [parcial]) )
+}
+-- denota un curso con el Alumno agregado a la lista
+function conAlumnoEnLista(curso, alumno){
+  return (Curso(curso | alumnos <- alumnos(curso) ++ [alumno]))
+}
+
+function alumnoActualizado(curso, alumno, nota, tema){
+  return ( alumno )
+}
+-- denota un curso con la nota de Alumno legajo agregada 
+function conNuevaNotaDeAlumno(curso, alumno, nota, tema){
+  return ( conAlumnoEnLista(sinAlumnoEnLista(curso, legajo(alumno)), nuevoParcialDeAlumno(alumno,nuevaNotaParcial(tema, nota)))) 
 }
 
 function evaluacionAlumno(curso, legajo, tema, nota){
 	-- denota el curso con la nota del tema atribuida al alumno legajo
+   return ( conNuevaNotaDeAlumno(curso, alumnoEnLista(curso, legajo), nota, tema))
+}
 
+function mayorParcialConTema(alumno, tema){ -- retorna b
+	nota := 0
+	foreach parcial in parciales(alumno){
+		nota := ifElse(tema(parcial) == tema && nota < nota(parcial), nota(parcial), nota)
+	}
+	return(nota)
+}
+	
+function aprobo(curso, legajo, tema){
+	return ( mayorParcialConTema(alumnoEnLista(curso, legajo), tema) >= 7)
+}
+
+function aproboTodo(curso, legajo){
+	todoAprobado := True
+	foreach tema in temas(curso){
+		todoAprobado := todoAprobado && aprobo(curso, legajo, tema) 
+	}
+	return (todoAprobado)
+}
+
+function vaBien(curso){
+	cantAlumnos := 0
+	aprobados := 0
+	foreach alumno in alumnos(curso){
+		cantAlumnos := cantAlumnos + 1
+		aprobados := aprobados + ifElse(aproboTodo(curso, legajo(alumno)), 1, 0) 
+	}
+	return(aprobados * 2 > cantAlumnos )
 }
 
 program {
+
 	temas := [1, 2, 3]
-	return( inscripcionAlumno(nuevoCurso(temas), 10001))
+	curso := nuevoCurso(temas)
+	curso := inscripcionAlumno(curso, 1001)
+	curso := inscripcionAlumno(curso, 2003)
+	curso := inscripcionAlumno(curso, 4022)
+	curso := evaluacionAlumno(curso, 1001, 1, 2)
+	curso := evaluacionAlumno(curso, 1001, 1, 5)
+	curso := evaluacionAlumno(curso, 2003, 1, 4)
+	curso := evaluacionAlumno(curso, 2003, 1, 8)
+	curso := evaluacionAlumno(curso, 4022, 1, 5)
+	curso := evaluacionAlumno(curso, 4022, 1, 7)
+
+	curso := evaluacionAlumno(curso, 1001, 2, 4)
+	curso := evaluacionAlumno(curso, 2003, 2, 9)
+	curso := evaluacionAlumno(curso, 4022, 2, 7)
+
+	curso := evaluacionAlumno(curso, 1001, 3, 7)
+	curso := evaluacionAlumno(curso, 2003, 3, 7)
+	curso := evaluacionAlumno(curso, 4022, 3, 7)
+
+	-- return(curso) 
+	return(vaBien(curso) )
 }
 
-
-
-	
 	
