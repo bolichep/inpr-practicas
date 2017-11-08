@@ -1,0 +1,26 @@
+type Usuario is record{
+  field id //number
+  field tweets // lista de tweets
+  field seguidores // lista de numero
+
+}
+
+type Tweet is record{
+  field fecha
+  field hora
+  field mensaje
+
+}
+
+type Twitter is record {
+  field usuarios // lista de usuarios
+  field proximoId // numero
+}
+
+type _ is record {
+  field #
+  field #
+}
+
+function altaDeUsuario(twitter){
+}
