@@ -272,7 +272,7 @@ function vaBien(curso){
 		cantAlumnos := cantAlumnos + 1
 		aprobados := aprobados + ifElse(aproboTodo(curso, legajo(alumno)), 1, 0) 
 	}
-	return(aprobados * 2 > cantAlumnos )
+	return(aprobados > cantAlumnos div 2)
 }
 
 program {
