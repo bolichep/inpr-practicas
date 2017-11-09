@@ -254,6 +254,7 @@ function nroBolitasAl(c, dir){
 	return(nroBolitas(c))
 }
 
+
 function singularSi(bool, elemento){
   return ( ifElse(bool, [elemento], []) )
 }
@@ -592,5 +593,10 @@ function concatenar(ls,ms){
 		lista_salida := lista_salida ++ [e]
 	}
 	return (lista_salida)
+}
+
+-- denota una lista como un unico elemento
+function singleton(elem){
+	return ([elem])
 }
 
