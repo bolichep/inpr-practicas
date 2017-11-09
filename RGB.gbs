@@ -1,0 +1,682 @@
+/* Colores que se pueden usar en la pantalla */
+function c_aguamarina() {
+	return (pixel(0,1,1,1))
+}
+
+function c_amarillo() {
+	return (pixel(1,1,0,0))
+}
+
+function c_azul() {
+	return (pixel(0,0,1,0))
+}
+
+function c_blanco() {
+	return (pixel(1,1,1,0))
+}
+
+function c_cian() {
+	return (pixel(0,1,1,0))
+}
+
+function c_gris_claro() {
+	return (pixel(1,1,1,1))
+}
+
+function c_gris_oscuro() {
+	return (pixel(0,0,0,0))
+}
+
+function c_magenta() {
+	return (pixel(1,0,1,0))
+}
+
+function c_marron() {
+	return (pixel(1,0,0,1))
+}
+
+function c_naranja() {
+	return (pixel(1,1,0,1))
+}
+
+function c_negro() {
+	return (pixel(0,0,0,1))
+}
+
+function c_nautico() {
+	return (pixel(0,0,1,1))
+}
+
+function c_purpura() {
+	return (pixel(1,0,1,1))
+}
+
+function c_rojo() {
+	return (pixel(1,0,0,0))
+}
+
+function c_verde_claro() {
+	return (pixel(0,1,0,0))
+}
+
+function c_verde_oscuro() {
+	return (pixel(0,1,0,1))
+}
+
+/* Imagen para realizar pruebas */
+function imagen1() {
+	return ([
+		// col 1
+		  c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		// col 2
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		// col 3
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_rojo() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_blanco()
+		, c_blanco()
+		, c_marron()
+		// col 4
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_marron()
+		, c_marron()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_blanco()
+		, c_marron()
+		, c_marron()
+		// col 5
+		, c_blanco()
+		, c_rojo() 
+		, c_marron()
+		, c_naranja() 
+		, c_naranja() 
+		, c_marron()
+		, c_blanco()
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja() 
+		, c_azul() 
+		, c_azul() 
+		, c_marron()
+		, c_marron()
+		// col 6
+		, c_rojo() 
+		, c_rojo() 
+		, c_marron()
+		, c_marron()
+		, c_marron()
+		, c_naranja() 
+		, c_naranja() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_marron()
+		, c_marron()
+		// col 7
+		, c_rojo() 
+		, c_rojo() 
+		, c_marron()
+		, c_naranja() 
+		, c_marron()
+		, c_naranja() 
+		, c_naranja() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_amarillo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_blanco()
+		, c_blanco()
+		// col 8
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja()
+		, c_naranja() 
+		, c_naranja()
+		, c_naranja() 
+		, c_naranja() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		// col 9
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja()
+		, c_naranja() 
+		, c_naranja()
+		, c_naranja() 
+		, c_naranja() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		// col 10
+		, c_rojo() 
+		, c_rojo() 
+		, c_negro()
+		, c_negro()
+		, c_naranja() 
+		, c_negro()
+		, c_naranja() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_amarillo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_blanco()
+		, c_blanco()
+		// col 11
+		, c_blanco() 
+		, c_rojo() 
+		, c_naranja()
+		, c_naranja()
+		, c_negro()
+		, c_negro() 
+		, c_naranja() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_azul() 
+		, c_marron()
+		, c_marron()
+		// col 12
+		, c_blanco()
+		, c_rojo() 
+		, c_blanco()
+		, c_naranja() 
+		, c_naranja() 
+		, c_negro()
+		, c_blanco()
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja() 
+		, c_azul() 
+		, c_azul() 
+		, c_marron()
+		, c_marron()
+		// col 13
+		, c_blanco()
+		, c_rojo()
+		, c_blanco()
+		, c_naranja()
+		, c_naranja()
+		, c_negro()
+		, c_blanco()
+		, c_blanco()
+		, c_rojo() 
+		, c_rojo() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_blanco()
+		, c_marron()
+		, c_marron()
+		// col 14
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_naranja() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_rojo() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_naranja() 
+		, c_blanco()
+		, c_blanco()
+		, c_marron()
+		// col 15
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		// col 16
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+		, c_blanco()
+		, c_blanco() 
+		, c_blanco()
+	])
+}
+
+/* Imagen para pruebas, comprimida */
+function imagen1_comprimida() {
+	return ([
+		  [[41], c_blanco()]
+		, [[1], c_rojo()]
+		, [[3], c_naranja()]
+		, [[2], c_blanco()]
+		, [[1], c_marron()]
+		, [[3], c_blanco()]
+		, [[2], c_marron()]
+		, [[3], c_blanco()]
+		, [[2], c_rojo()]
+		, [[3], c_naranja()]
+		, [[1], c_blanco()]
+		, [[2], c_marron()]
+		, [[1], c_blanco()]
+		, [[1], c_rojo()]
+		, [[1], c_marron()]
+		, [[2], c_naranja()]
+		, [[1], c_marron()]
+		, [[1], c_blanco()]
+		, [[4], c_rojo()]
+		, [[1], c_naranja()]
+		, [[2], c_azul()]
+		, [[2], c_marron()]
+		, [[2], c_rojo()]
+		, [[3], c_marron()]
+		, [[2], c_naranja()]
+		, [[3], c_rojo()]
+		, [[4], c_azul()]
+		, [[2], c_marron()]
+		, [[2], c_rojo()]
+		, [[1], c_marron()]
+		, [[1], c_naranja()]
+		, [[1], c_marron()]
+		, [[2], c_naranja()]
+		, [[3], c_azul()]
+		, [[1], c_amarillo()]
+		, [[3], c_azul()]
+		, [[2], c_blanco()]
+		, [[2], c_rojo()]
+		, [[5], c_naranja()]
+		, [[2], c_rojo()]
+		, [[4], c_azul()]
+		, [[3], c_blanco()]
+		, [[2], c_rojo()]
+		, [[5], c_naranja()]
+		, [[2], c_rojo()]
+		, [[4], c_azul()]
+		, [[3], c_blanco()]
+		, [[2], c_rojo()]
+		, [[2], c_negro()]
+		, [[1], c_naranja()]
+		, [[1], c_negro()]
+		, [[1], c_naranja()]
+		, [[3], c_azul()]
+		, [[1], c_amarillo()]
+		, [[3], c_azul()]
+		, [[3], c_blanco()]
+		, [[1], c_rojo()]
+		, [[2], c_naranja()]
+		, [[2], c_negro()]
+		, [[1], c_naranja()]
+		, [[3], c_rojo()]
+		, [[4], c_azul()]
+		, [[2], c_marron()]
+		, [[1], c_blanco()]
+		, [[1], c_rojo()]
+		, [[1], c_blanco()]
+		, [[2], c_naranja()]
+		, [[1], c_negro()]
+		, [[1], c_blanco()]
+		, [[4], c_rojo()]
+		, [[1], c_naranja()]
+		, [[2], c_azul()]
+		, [[2], c_marron()]
+		, [[1], c_blanco()]
+		, [[1], c_rojo()]
+		, [[1], c_blanco()]
+		, [[2], c_naranja()]
+		, [[1], c_negro()]
+		, [[2], c_blanco()]
+		, [[2], c_rojo()]
+		, [[3], c_naranja()]
+		, [[1], c_blanco()]
+		, [[2], c_marron()]
+		, [[4], c_blanco()]
+		, [[1], c_naranja()]
+		, [[4], c_blanco()]
+		, [[1], c_rojo()]
+		, [[3], c_naranja()]
+		, [[2], c_blanco()]
+		, [[1], c_marron()]
+		, [[32], c_blanco()]
+	])
+}
+
+/* Programas de prueba */
+
+-- Ejercicio 1
+
+function pixel(r, g, b, i){
+	return([r, g, b, i])
+}
+function red(pixel){
+	return (head(pixel))
+}
+function green(pixel){
+	return (head(tail(pixel)))
+}
+function blue(pixel){
+	return (last(init(pixel)))
+}
+function intensity(pixel){
+	return (last(pixel))
+}
+/*
+program {
+	b := c_blanco()
+	return(red(b) == 1, green(b) == 1, blue(b) == 1, intensity(b) == 0)
+}
+/**/
+/*
+program {
+	b := c_rojo()
+	return(red(b) == 1, green(b) == 0, blue(b) == 0, intensity(b) == 0)
+}
+/**/
+
+-- Ejercicio 2
+procedure PrenderPixel(pixel){
+	LimpiarCelda()
+	PonerSi(Rojo, red(pixel) == 1)
+	PonerSi(Verde, green(pixel) == 1)
+	PonerSi(Azul, blue(pixel) == 1)
+	PonerSi(Negro, intensity(pixel) == 1)
+}
+
+procedure PintarPantalla(pixel){
+	IrAlInicioT(Norte, Este)
+	while (puedeMoverT(Norte, Este)){
+		PrenderPixel(pixel)
+		MoverT(Norte, Este)
+	}
+	PrenderPixel(pixel)
+}
+/*
+program {
+	PrenderPixel(c_rojo())
+	Mover(Norte)
+	PrenderPixel(c_azul())
+}
+
+--*/
+
+/*
+program {
+	-- ColorAPantalla(c_cian())
+	PintarPantalla(c_cian())
+}
+--*/
+
+-- Ejercicio 3
+-- prec: imagenData debe tener tantas jejejeje
+-- imagenData es una lista de pixeles
+procedure ImagenAPantalla(imagenData){ 
+		idata := imagenData
+		IrAlInicioT(Sur, Este)
+		while (puedeMoverT(Sur, Este)){
+			PrenderPixel(head(idata))
+			idata := tail(idata)
+			MoverT(Sur, Este)
+		}
+		PrenderPixel(head(idata))
+}
+
+/*
+program {
+	ImagenAPantalla(imagen1())
+}
+--*/
+
+-- Ejercicio 4
+-- Que dado un pixel, transforma dicho pixel en otro, el cual puede ser blanco, negro,
+-- gris claro, o gris oscuro.
+function en_gris(pixel){
+	pixel_gris := pixel
+	if (pixel /= c_gris_claro() && pixel /= c_gris_oscuro() && pixel /= c_blanco() && pixel /= c_negro()){
+		pixel_gris := [ intensity(pixel), intensity(pixel), intensity(pixel), intensity(pixel) ]
+	}
+	return (pixel_gris)
+}
+
+function escala_de_grises(imagenData){
+		iGris := []
+		foreach pixel in imagenData{
+			iGris := iGris ++ [en_gris(pixel)]
+		}
+		return(iGris)
+}
+/*
+program {
+	ImagenAPantalla(escala_de_grises(imagen1()))
+}
+--*/
+
+-- Ejercicio 5
+function comprimir0(imagenData){
+	last_color := head(imagenData)
+	last_count := 1
+	i_comprimida := []
+	foreach pixel in tail(imagenData){
+		if (last_color == pixel){
+			last_count := last_count + 1
+		}	else { 
+			i_comprimida := i_comprimida ++ [[[last_count], last_color]]
+			last_color := pixel
+			last_count := 1
+		}
+	}
+	return (i_comprimida ++ [[[last_count], last_color]])
+}
+
+ -- denota la longitud de la lista e12
+function longitud(lista_entrada){
+  longitud := 0
+  foreach elemento in lista_entrada{
+    longitud := longitud + 1
+  }
+  return(longitud)
+}
+
+
+-- denota una lista con los elementos agrupados por valor es decir de 
+-- [a,a,a,b,b,c,b,b,a] denota [[a,a,a],[b,b],[c],[b,b],[a]]	
+function z1(lista){
+  acumulador := [head(lista)]
+	lista_entrada := tail(lista)
+
+	while ( not isEmpty(lista_entrada) && head(lista_entrada) == last(acumulador) ) {
+		acumulador := acumulador ++ [ head(lista_entrada) ]
+		lista_entrada := tail(lista_entrada)
+	}
+
+	return ([acumulador,lista_entrada])
+}
+
+function comprimir(imagenData){
+--	[a,a,a,b,b,c,b,b,a]
+	lista_entrada := imagenData
+	lista_salida := []
+	while (not isEmpty(lista_entrada)) {
+		lista := z1(lista_entrada)
+		lista_entrada := head(tail(lista))
+		lista_salida := lista_salida ++ [ head(lista) ]
+	} 
+
+--	[[a,a,a],[b,b],[c],[b,b],[a]]
+	lista_salida2 := []	
+	foreach e in lista_salida {
+		lista_salida2 := lista_salida2 ++ [[ [longitud(e)] , head(e) ]]
+	}
+  
+--	[[a],[b],[c],[b],[a]]
+  	return (lista_salida2)
+}
+/*
+program {
+	return(comprimir(imagen1()), imagen1_comprimida(), comprimir(imagen1()) == imagen1_comprimida())
+}
+--*/
+-- denota una lista con n repeticiones de x. si n <=0 retorna una lista vacia e9
+function repeticionpixeles(n , x){
+  lista := []
+  repeat(n){
+    lista := lista ++ x
+    }
+  return (lista)
+}
+
+
+function descomprimir(imageData){
+	-- [[[3],[1,1,1,0]], [[2], [0,0,0,1]]]
+	lista_salida := []
+	foreach comp_token in imageData{
+		lista_salida := lista_salida ++ repeticionpixeles (head(head(comp_token)),  tail(comp_token) )
+	}
+	return(lista_salida)
+
+}
+/*
+program {
+	return(descomprimir(imagen1_comprimida()), imagen1(), descomprimir(imagen1_comprimida()) == imagen1())
+}
+--*/
+
+-- Ejercicio 6
+function tamanho(imageData){
+	return (longitud(imageData))
+}
+/*
+program {
+	return(tamanho(imagen1()) == 256)
+}
+--*/
+-- Ej Adicionales
+-- denota bool en tanto el elemento e pertenesca a la lista xs e23
+function pertenece(e, ls){
+	pertenece := False
+	foreach elemento in ls{
+		pertenece := pertenece || (elemento == e)
+	} 
+	return (pertenece)
+}
+-- denota una lista sin elementos repetidos desde la lista ls e24
+function sinDuplicados(ls){
+	lista_salida := []
+	foreach e in ls{
+		lista_salida := lista_salida ++ ifElse(pertenece(e, lista_salida), [], [e]) 
+	}
+	return(lista_salida)
+}
+
+
+function cantColores(imageData){
+	return (longitud(sinDuplicados(imageData)))
+}
+/*
+program {
+	return(cantColores(imagen1()) == 7)
+}
+--*/
+/**/
+-- ordenar listaimagen, comprimir tomar los dos primeros tokens en ese orden
+program {
+	return(coloresDominantes_(imagen1()) == [c_blanco(), c_naranja()])
+}
+--*/
+

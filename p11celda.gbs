@@ -1,0 +1,17 @@
+type Celda is record{
+	field azul // nro
+	field rojo // nro
+	field verde // nro
+	field negro // nro
+}
+
+type Fila is record{
+	field celdas // lista de Celda
+}
+
+type Tablero is record{
+	field filas // lista de Fila
+}
+
+function leerFila(){
+	return 

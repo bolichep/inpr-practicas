@@ -1,0 +1,113 @@
+type Usuario is record{
+  field id //number
+  field tweets // lista de tweets
+  field seguidores // lista de numero
+
+}
+
+type Tweet is record{
+  field fecha
+  field hora
+  field mensaje
+
+}
+
+type Twitter is record {
+  field usuarios  // lista de Usuario
+  field proximoId // numero
+}
+----------------------------------------
+
+function conUsuarioNuevoEnLista(twitter){
+	return ( usuarios(twitter) ++ [ Usuario( id <- proximoId(twitter), tweets <- [], seguidores <- []) ])
+}
+
+function altaDeUsuario(twitter){
+
+	return ( Twitter (twitter | usuarios <- conUsuarioNuevoEnLista(twitter), 
+					proximoId <- proximoId(twitter) + 1))
+}
+
+-- denota el usuario de la lista "usuarios" correspondiente a "id"
+-- prec: el id debe existir
+function usuarioConId(usuarios, id){
+	lsUsuarios := usuarios
+	while ( id(head(lsUsuarios)) /= id ) {
+		lsUsuarios := tail(lsUsuarios)
+	}
+	return (head(lsUsuarios))
+}
+
+	-- denota una lista de Usuario el usuario con "id", removido y el "id" removido de los seguidores
+function sinId(usuarios, id){
+	lsUsuarios := []
+	foreach usuario in usuarios{
+		lsUsuarios := lsUsuarios ++ [ Usuario ( usuario | seguidores <- sinElemento(seguidores(usuario), id)) ]
+	}
+	return (sinElemento(lsUsuarios, usuarioConId(lsUsuarios, id)))
+}
+
+{- tomar la lista de usuarios en "twitter" y remover usuarioConId(usuarios, id), quitar "id" de todas las listas de seguidores, denotar registro Twitter con lista de usuarios actualizada -}
+function bajaDeUsuario(twitter, id){
+	return ( Twitter (twitter | usuarios <- sinId( usuarios(twitter), id )))
+}
+
+-- denota twitter con la lista de usuarios actualizada con el usuario correspondiente a idSeguidor actualizado en la lista de seguidores con el añadido de idSeguir
+function seguirId(usuarios, idSeguidor, uSeguir) {
+	return ( sinElemento(usuarios, uSeguir) ++ [Usuario( uSeguir | seguidores <- seguidores(uSeguir) ++ [idSeguidor])] )
+}
+
+function seguirA(twitter, idSeguidor, idSeguir){
+	return ( Twitter(twitter | usuarios <- seguirId(usuarios(twitter), idSeguidor, usuarioConId(usuarios(twitter), idSeguir) ) ))
+}
+
+-- denota lista de Usuario con el usuario con "idEmisor" , con su lista de Tweet actualizada
+function publicarTweet(usuarios, id, fecha, hora, mensaje){
+	usuario := usuarioConId(usuarios, id)
+	return( sinElemento( usuarios, usuario) ++ 
+	  [Usuario(usuario | tweets <- tweets(usuario) ++ [Tweet(fecha <- fecha, hora <- hora, mensaje <- mensaje)])]
+	)
+}
+
+
+function tweetear(twitter, idEmisor, fecha, hora, mensaje){
+	return( Twitter( twitter | usuarios <- publicarTweet(usuarios(twitter), idEmisor, fecha, hora, mensaje)  ))
+}
+
+{- estra: ver cada usuario e incluir los tweets de aquel usuario que constenga este id en su lista de seguidores -}
+function tweetsVisiblesPorUsuario(twitter, id){
+	lsTweets := []
+	foreach usuario in usuarios(twitter){
+		if ( pertenece(id, seguidores(usuario) ) ){
+			lsTweets := lsTweets ++ tweets(usuario)
+		}
+	}
+	return ( lsTweets ) 
+}
+
+program{
+	twitter := Twitter(usuarios <- [], proximoId <- 1)
+	twitter := altaDeUsuario(twitter)
+	twitter := altaDeUsuario(twitter)
+	twitter := altaDeUsuario(twitter)
+	twitter := altaDeUsuario(twitter)
+	twitter := altaDeUsuario(twitter)
+	twitter := seguirA(twitter, 1, 5)
+	twitter := seguirA(twitter, 2, 4)
+	twitter := seguirA(twitter, 4, 2)
+	twitter := seguirA(twitter, 5, 4)
+	twitter := seguirA(twitter, 5, 1)
+	twitter := seguirA(twitter, 5, 3)
+	/*
+	twitter := bajaDeUsuario(twitter, 4)
+	twitter := bajaDeUsuario(twitter, 1)
+	twitter := bajaDeUsuario(twitter, 3)
+	*/
+	twitter := tweetear(twitter, 1 , 9, 9, 1120)
+	twitter := tweetear(twitter, 4 , 8, 8, 1121)
+	twitter := tweetear(twitter, 3 , 7, 7, 1122)
+	twitter := tweetear(twitter, 2 , 6, 6, 1123)
+
+	return (twitter, tweetsVisiblesPorUsuario(twitter, 5), tweetsVisiblesPorUsuario(twitter, 2))
+}
+

@@ -1,0 +1,304 @@
+type Persona is record {
+  field dni // nro
+  field domicilio // nro
+  field sexo // bool True=masculino 
+--  field madre // registro Persona
+}
+
+/*
+program{
+
+padron := []
+padron := padron ++ [Persona(dni<-21000, domicilio<-10, sexo<-True)]--, madre<-0)]
+padron := padron ++ [Persona(dni<-31000, domicilio<-20, sexo<-True)]--, madre<-0)]
+padron := padron ++ [Persona(dni<-41000, domicilio<-10, sexo<-False)]--, madre<-0)]
+padron := padron ++ [Persona(dni<-51000, domicilio<-40, sexo<-True)]--, madre<-0)]
+padron := padron ++ [Persona(dni<-61000, domicilio<-40, sexo<-False)]--, madre<-0)]
+return (
+	padron,
+	consistente(padron)
+	)
+}
+*/
+
+-- denota booleano en referencia a si comparten domicilio las Persona pasadas como parametro
+function convivientes(persona1, persona2){
+	return(domicilio(persona1) == domicilio(persona2))
+}
+
+-- denota el dni en el registro tipo Persona que se encuentre en la lista dePersonas de tipo Personas
+function dniEnCabezaDeLista(dePersonas){
+  return (dni(head(dePersonas)))
+}
+
+function perteneceDNI(padron, dni){
+  ls_padron := padron
+  while (not isEmpty(ls_padron) && dni(head(ls_padron)) /= dni){
+    ls_padron := tail(ls_padron)
+  }
+  return( not isEmpty(ls_padron) )
+}
+
+function personaConDNI(padron, dni){
+  ls_padron := padron
+  while (not isEmpty(ls_padron) && dni(head(ls_padron)) /= dni){
+    ls_padron := tail(ls_padron)
+  }
+  return(head(ls_padron))
+}
+
+-- denota la primer persona con domicilio 'domicilio'
+-- param: padron es una lista de typo Personas
+function primerPersonaConDomicilio(padron, domicilio){
+  ls_padron := padron
+  while (not isEmpty(ls_padron) && domicilio(head(ls_padron)) /= domicilio){
+    ls_padron := tail(ls_padron)
+  }
+  if (not isEmpty(ls_padron)) { primeraPersona := head(ls_padron) }
+	else { primeraPersona := Persona(madre<-0, dni<-0, domicilio<-0, sexo<-0) }
+  return(primeraPersona)
+}
+
+function convivientes_padron1(padron, domicilio){
+  ls_pers_mismo_dom := [ primerPersonaConDomicilio(padron, domicilio) ]
+  foreach pers in padron {
+    if (convivientes(pers, head(ls_pers_mismo_dom)) && pers /= head(ls_pers_mismo_dom)){
+      ls_pers_mismo_dom := ls_pers_mismo_dom ++ [pers]}
+  }
+  return(ls_pers_mismo_dom)
+}
+
+-----
+-- denota la sublista de la lista padron desde la primer Persona con domicilio hasta el final de la lista padron
+function padronDesdePersonaConDomicilio(padron, domicilio){
+   ls_padron := tail(padron)
+  while (not isEmpty(ls_padron) && domicilio(head(padron)) /= domicilio){
+    ls_padron := tail(ls_padron)
+  }
+  return(ls_padron)
+}
+
+function convivientes_padron2(padron, domicilio){
+  ls_pers_mismo_dom := [ primerPersonaConDomicilio(padron, domicilio) ]
+  foreach pers in padronDesdePersonaConDomicilio (padron, domicilio){
+    if (convivientes(pers, head(ls_pers_mismo_dom))) {
+      ls_pers_mismo_dom := ls_pers_mismo_dom ++ [pers]
+    }
+  }
+  return(ls_pers_mismo_dom)
+}
+
+function sinPersonaConDNI(padron, dni){ --ok ej4
+	-- denota nuevo padron sin la persona con el dni dado
+	return (sinElemento(padron, personaConDNI(padron, dni)))
+}
+
+function sinPersonasConDNI(padron, lista_dni){ -- ok ej2-5
+	-- denota un padron sin los dni en lista_dni
+	ls_padron := padron
+	foreach dni in lista_dni{
+		ls_padron := sinPersonaConDNI(ls_padron, dni)
+	}
+	return (ls_padron)
+}
+----
+-- denota el padron con la persona pasada agregada
+function personaNuevaEnPadron(padron, persona){
+	return (padron ++ [persona])
+}
+
+function nuevosDatosPersona(padron, dniViejo, persona){ -- ok ej2-6
+	-- denota el padron sin la persona con dniViejo y con persona agregada 
+	return ( personaNuevaEnPadron(sinPersonaConDNI(padron, dniViejo), persona))
+}
+
+function mudarFamilia(padron, domicilioAntiguo, domicilioNuevo){ -- ok ej2-7
+	-- denota el padron con el domicilio cambiado
+	ls_padron := []
+	foreach pers in padron{
+		ls_padron := ls_padron ++ [ifElse(domicilioAntiguo == domicilio(pers), Persona(pers | domicilio <- domicilioNuevo), pers)]
+	}
+	return(ls_padron)
+}
+
+---- 
+-- ej 2-8
+/*
+ denota la primer persona con domicilio 'domicilio'
+ param: padron es una lista de typo Personas
+ primerPersonaConDomicilio(padron, domicilio)
+
+ denota la sublista de la lista padron desde la primer Persona con domicilio 
+ hasta el final de la lista padron
+ padronDesdePersonaConDomicilio(padron, domicilio)
+*/
+
+function familias(padron){
+	-- denota una lista de Personas con igual domicilio en patron
+	-- convivientes_padron2(padron, domicilio)
+	lista_familias := []
+	foreach pers in padron{
+		lista_familias := lista_familias ++ [convivientes_padron1(padron, domicilio(pers))]
+	}
+	return(sinDuplicados(lista_familias))
+	-- return(lista_familias)
+}
+
+function dameUnaFamilia(padron){
+	-- denota una lista con una familia del padron
+	return(head(familias(padron)))
+
+}
+
+function consistente(padron){ --ok ej 2-10
+	consistente := True
+	foreach pers in padron{
+		consistente := consistente && not perteneceDNI(sinPersonaConDNI(padron,dni(pers)), dni(pers))
+	}
+	return(consistente)
+}
+
+/* ....Ej 3...... */
+-- Prop: Modelar un registro Curso consistente una lista de Alumno y un lista de temas (nros)
+type Curso is record{
+	field alumnos // [Alumno]
+	field temas // [nro]
+}
+-- Prop: Modela un registro Alumno con una lista de sus Parciales y nro Legajo
+-- Invariante:  la lista parciales puede contener temas repetidos
+type Alumno is record{
+	field legajo // nro
+	field parciales // [Parcial]
+}
+-- Prop: Modela un registro Parcial con el nro de tema del mismo y el nro de nota
+-- Invariante: 0 <= nota <= 10
+type Parcial is record{
+	field tema // nro
+	field nota // nro
+}
+
+/*
+Curso = [Alumno] =	legajo
+										[Parcial] = tema
+																nota
+				[tema]
+*/
+
+-- denota un registro Curso con la lista de alumnos vacia y los temas dados en el parametro
+-- param: temas, lista de temas (nros)
+function nuevoCurso(temas){
+	return (Curso(alumnos <- [], temas <- temas))
+}
+
+-- denora un curso con el alumno nro de legajo inscripto
+function inscripcionAlumno(curso, legajo){
+	return (Curso(curso | alumnos <- alumnos(curso) ++ [Alumno(legajo <- legajo, parciales <- [])]))
+}
+
+/*
+Curso = [Alumno] =	legajo
+										[Parcial] = tema
+																nota
+				[tema]
+*/
+
+-- denota una entrade en Parcial 
+function nuevaNotaParcial(tema, nota){
+	return (Parcial(tema <- tema, nota <-nota))
+}
+
+-- denota el Alumno coinsidente con legajo de una lista de Alumnos 
+-- prec el Alumno  debe estar
+function alumnoEnLista(curso, legajo){
+  lista := alumnos(curso)
+  while ( legajo(head(lista)) /= legajo){
+    lista := tail(lista)
+    }
+  return(head(lista))
+}
+
+
+-- denota curso sin Alumno en lista alumnos
+function sinAlumnoEnLista(curso, legajo){
+  return( Curso(curso | alumnos <- sinElemento(alumnos(curso), alumnoEnLista(curso, legajo))) )
+}
+
+-- denota un Alumno con su parcial agregado
+function nuevoParcialDeAlumno(alumno, parcial){
+	return( Alumno(alumno | parciales <- parciales(alumno) ++ [parcial]) )
+}
+-- denota un curso con el Alumno agregado a la lista
+function conAlumnoEnLista(curso, alumno){
+  return (Curso(curso | alumnos <- alumnos(curso) ++ [alumno]))
+}
+
+function alumnoActualizado(curso, alumno, nota, tema){
+  return ( alumno )
+}
+-- denota un curso con la nota de Alumno legajo agregada 
+function conNuevaNotaDeAlumno(curso, alumno, nota, tema){
+  return ( conAlumnoEnLista(sinAlumnoEnLista(curso, legajo(alumno)), nuevoParcialDeAlumno(alumno,nuevaNotaParcial(tema, nota)))) 
+}
+
+function evaluacionAlumno(curso, legajo, tema, nota){
+	-- denota el curso con la nota del tema atribuida al alumno legajo
+   return ( conNuevaNotaDeAlumno(curso, alumnoEnLista(curso, legajo), nota, tema))
+}
+
+function mayorParcialConTema(alumno, tema){ -- retorna b
+	nota := 0
+	foreach parcial in parciales(alumno){
+		nota := ifElse(tema(parcial) == tema && nota < nota(parcial), nota(parcial), nota)
+	}
+	return(nota)
+}
+	
+function aprobo(curso, legajo, tema){
+	return ( mayorParcialConTema(alumnoEnLista(curso, legajo), tema) >= 7)
+}
+
+function aproboTodo(curso, legajo){
+	todoAprobado := True
+	foreach tema in temas(curso){
+		todoAprobado := todoAprobado && aprobo(curso, legajo, tema) 
+	}
+	return (todoAprobado)
+}
+
+function vaBien(curso){
+	cantAlumnos := 0
+	aprobados := 0
+	foreach alumno in alumnos(curso){
+		cantAlumnos := cantAlumnos + 1
+		aprobados := aprobados + ifElse(aproboTodo(curso, legajo(alumno)), 1, 0) 
+	}
+	return(aprobados > cantAlumnos div 2)
+}
+
+program {
+
+	temas := [1, 2, 3]
+	curso := nuevoCurso(temas)
+	curso := inscripcionAlumno(curso, 1001)
+	curso := inscripcionAlumno(curso, 2003)
+	curso := inscripcionAlumno(curso, 4022)
+	curso := evaluacionAlumno(curso, 1001, 1, 2)
+	curso := evaluacionAlumno(curso, 1001, 1, 5)
+	curso := evaluacionAlumno(curso, 2003, 1, 4)
+	curso := evaluacionAlumno(curso, 2003, 1, 8)
+	curso := evaluacionAlumno(curso, 4022, 1, 5)
+	curso := evaluacionAlumno(curso, 4022, 1, 7)
+
+	curso := evaluacionAlumno(curso, 1001, 2, 4)
+	curso := evaluacionAlumno(curso, 2003, 2, 9)
+	curso := evaluacionAlumno(curso, 4022, 2, 7)
+
+	curso := evaluacionAlumno(curso, 1001, 3, 7)
+	curso := evaluacionAlumno(curso, 2003, 3, 7)
+	curso := evaluacionAlumno(curso, 4022, 3, 7)
+
+	-- return(curso) 
+	return(vaBien(curso) )
+}
+
+	
