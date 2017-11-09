@@ -1,7 +1,7 @@
 type Pelicula is record {
 	field titulo	 	# nro
 	field director 	# nro
-	field califs		# lista de Califacion
+	field califs		# lista de Calificacion
 }
 
 type Calif is record {
@@ -36,13 +36,59 @@ function calificar(db, titulo, director, usuario, nota){
 	return (lsDb)
 }
 
+-- denota los usuarios en la lista de calificaciones
+function usrEnCalif(calificaciones){
+	usuarios := []
+	foreach cal in calificaciones{
+		usuarios := usuarios ++ [usr(cal)]
+	}
+	return (usuarios) 
+}
+-- denota la lista de usuarios q calificaron al menos una pelicula sin duplicados
+function usuariosDB(db){
+	usuarios := []
+	foreach peli in db{
+		usuarios := usuarios ++ usrEnCalif(califs(peli))
+	}
+	return (sinDuplicados(usuarios))
+}
+
+function gustoPeli(calificaciones, usuario){
+	gusto := False
+	foreach calif in calificaciones{
+		gusto := gusto || usr(calif) == usuario && nota(calif) >= 8
+	}
+	return (gusto)
+}
+
+function gustaronAlUsuario(db, usuario){
+-- denota lista de peliculas en las que el usuario califico con ocho o mas
+	gustaron := []
+	foreach peli in db{
+		gustaron := gustaron ++ singularSi(gustoPeli(califs(peli), usuario), titulo(peli))
+	}
+	return (gustaron)
+}
+
+function gustaronDeLaPelicula(db, titulo, director){
+	-- denota lista de usuarios que gustaron de titulo/director
+	ls := db
+	while (not isEmpty(ls) && titulo(head(ls)) /= titulo && director(head(ls)) /= director) {
+		ls := tail(ls)
+	}
+	if (not isEmpty(ls)){
+		usuariosQueGustaronPelicula(head())
+
+}
 program{
 	db := []
 	db := db ++ [Pelicula(titulo<-301, director<-210, califs <- [Calif(nota<-10, usr<-100), Calif(nota<-8, usr<-101)])]
 	db := db ++ [Pelicula(titulo<-304, director<-211, califs <- [Calif(nota<-1, usr<-100), Calif(nota<-9, usr<-101)])]
-	db := db ++ [Pelicula(titulo<-303, director<-212, califs <- [Calif(nota<-4, usr<-100), Calif(nota<-2, usr<-101)])]
+	db := db ++ [Pelicula(titulo<-303, director<-212, califs <- [Calif(nota<-4, usr<-100), Calif(nota<-2, usr<-102)])]
+	db := db ++ [Pelicula(titulo<-302, director<-212, califs <- [Calif(nota<-5, usr<-100), Calif(nota<-8, usr<-103)])]
 
 	db := calificar(db, 304, 211, 100, 5)
-	return (db)
+	
+	return (db, gustaronAlUsuario(db, 101))
 }
 
