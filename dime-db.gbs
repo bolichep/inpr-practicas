@@ -1,0 +1,48 @@
+type Pelicula is record {
+	field titulo	 	# nro
+	field director 	# nro
+	field califs		# lista de Califacion
+}
+
+type Calif is record {
+	field usr 	# nro
+	field nota 	# 0 <= nro  <= 10
+}
+
+# db es un renombre de lista de Pelicula
+
+-- denota reg Calif del usuario "usr"
+-- prec hay un reg Calif con usr igual a usr
+function califUsr(califs, usr){
+	lista := califs
+	while ( usr(head(lista)) /= usr ) {
+		lista := tail(lista)
+	}
+	return( head(lista))
+}
+
+function calificar(db, titulo, director, usuario, nota){
+	lsDb := []
+	foreach peli in db{
+		if ( titulo(peli) == titulo && director(peli) == director ) {
+			lsDb := lsDb ++ [ Pelicula(peli | califs <- sinElemento(califs(peli), califUsr(califs(peli), usuario)) ++ [Calif(nota<-nota, usr<-usuario)])]
+			}
+		else
+			{
+			lsDb := lsDb ++ [peli]
+			}
+	}
+
+	return (lsDb)
+}
+
+program{
+	db := []
+	db := db ++ [Pelicula(titulo<-301, director<-210, califs <- [Calif(nota<-10, usr<-100), Calif(nota<-8, usr<-101)])]
+	db := db ++ [Pelicula(titulo<-304, director<-211, califs <- [Calif(nota<-1, usr<-100), Calif(nota<-9, usr<-101)])]
+	db := db ++ [Pelicula(titulo<-303, director<-212, califs <- [Calif(nota<-4, usr<-100), Calif(nota<-2, usr<-101)])]
+
+	db := calificar(db, 304, 211, 100, 5)
+	return (db)
+}
+
