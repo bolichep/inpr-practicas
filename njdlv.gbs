@@ -1,0 +1,152 @@
+function hayBolitasAl(color, dir){
+	Mover(dir)
+	return ( hayBolitas(color))
+}
+
+function celulaVivaAl(dir){
+	return ( puedeMover(dir) && hayBolitasAl(viva(), dir))
+}
+
+function celulaViva(){
+	return (nroBolitas(viva()) /= 0)
+}
+
+function viva(){
+	return (Verde)
+}
+
+function nroVecinas(){
+	nroVivas := 0
+	foreach dir in [minDir()..maxDir()]{
+		nroVivas := nroVivas + nroVivasAl(dir)
+	}
+	return (nroVivas)
+}
+
+function nroVivasAl(dir){
+  vivas := nroVivasAl2(dir)
+	if (puedeMover(dir)) {
+		Mover(dir)
+	}
+
+		
+	return (  vivas + nroVivasAl2(siguiente(dir)))
+}
+
+function nroVivasAl2(dir){
+	return (ifElse(celulaVivaAl(dir), 1, 0))
+}
+
+procedure ChequearEscasezOSobrePoblacion(){
+	if(celulaViva() && (hayHayEscasezDePoblacion() || haySobrePoblacion() ) ){
+		MarcarCelulaParaSerEliminada()
+	}
+}
+
+procedure ChequearReanimacion(){
+	if( not celulaViva() && puedeReproducirse()  ){
+		MarcarCelulaParaSerReanimada()
+	}
+}
+
+function hayHayEscasezDePoblacion(){
+	return( nroVecinas() < 2 )
+}
+ 
+
+function haySobrePoblacion(){
+	return( nroVecinas() > 3 )
+}
+
+
+function puedeReproducirse(){
+	return ( nroVecinas() == 3 )
+}
+
+procedure ProcesarCelula(){
+	
+	ChequearEscasezOSobrePoblacion()
+	ChequearReanimacion()
+}
+
+procedure ProcesarTablero(){
+	IrAlInicioT(Norte, Este)
+	while ( puedeMoverT(Norte, Este)){
+		ProcesarCelula()
+		MoverT(Norte, Este)
+	}
+	ProcesarCelula()
+}
+
+procedure ProcesarMarcados(){
+	if ( estaMarcadaParaSerEliminada()) {
+		EliminarCelula()
+	}
+	if ( estaMarcadaParaSerReanimada()){
+		ReanimarCelula()
+	}
+}
+
+
+procedure ActualizarUniverso(){
+	ProcesarTablero()
+	ReProcesarTablero()
+}
+
+procedure ReProcesarTablero(){
+	IrAlInicioT(Norte, Este)
+	while ( puedeMoverT(Norte, Este)){
+		ProcesarMarcados()
+		MoverT(Norte, Este)
+	}
+	ProcesarMarcados()
+}
+
+
+procedure Simular(n){
+	repeat (n){
+		ActualizarUniverso()
+	}
+}
+
+----
+procedure EliminarCelula(){
+  if (estaMarcadaParaSerEliminada()){
+    Sacar(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure ReanimarCelula(){
+  if (estaMarcadaParaSerReanimada()){
+    Poner(Verde)
+    QuitarMarcas()
+  }
+}
+
+procedure QuitarMarcas(){
+	SacarSi(Negro, hayBolitas(Negro))
+	SacarSi(Azul, hayBolitas(Azul))
+}
+
+function estaMarcadaParaSerEliminada(){
+  return (hayBolitas(Negro))
+}
+
+function estaMarcadaParaSerReanimada(){
+  return (hayBolitas(Azul))
+}
+procedure MarcarCelulaParaSerEliminada(){
+  Poner(Negro)
+}
+
+procedure MarcarCelulaParaSerReanimada(){
+  Poner(Azul)
+}
+
+
+program {
+	Simular(1)
+	return ( hayHayEscasezDePoblacion() , haySobrePoblacion() , celulaViva() )
+-- return (estaMarcadaParaSerEliminada())
+}
