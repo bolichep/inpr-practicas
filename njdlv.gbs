@@ -24,11 +24,26 @@ function nroVecinas(){
 }
 
 function nroVivasAl(dir){
+	vivas := 0
+		if (puedeMover(dir)){
+			Mover(dir)
+			vivas := vivas + ifElse(celulaViva(), 1, 0)
+		}
+		if (puedeMover(siguiente(dir))){
+			Mover(siguiente(dir))
+			vivas := vivas + ifElse(celulaViva(), 1, 0)
+		}
+	
+	return (vivas)
+
+}
+/*
+function nroVivasAl(dir){
   vivas := nroVivasAl2(dir)
 	if (puedeMover(dir)) {
 		Mover(dir)
 	}
-
+--
 		
 	return (  vivas + nroVivasAl2(siguiente(dir)))
 }
@@ -36,15 +51,16 @@ function nroVivasAl(dir){
 function nroVivasAl2(dir){
 	return (ifElse(celulaVivaAl(dir), 1, 0))
 }
+*/
 
 procedure ChequearEscasezOSobrePoblacion(){
-	if(celulaViva() && (hayHayEscasezDePoblacion() || haySobrePoblacion() ) ){
+	if((hayHayEscasezDePoblacion() || haySobrePoblacion() ) ){
 		MarcarCelulaParaSerEliminada()
 	}
 }
 
 procedure ChequearReanimacion(){
-	if( not celulaViva() && puedeReproducirse()  ){
+	if( puedeReproducirse()  ){
 		MarcarCelulaParaSerReanimada()
 	}
 }
@@ -65,8 +81,9 @@ function puedeReproducirse(){
 
 procedure ProcesarCelula(){
 	
-	ChequearEscasezOSobrePoblacion()
-	ChequearReanimacion()
+	if ( celulaViva() ) { ChequearEscasezOSobrePoblacion() }
+	else {
+		ChequearReanimacion() }
 }
 
 procedure ProcesarTablero(){
@@ -146,7 +163,8 @@ procedure MarcarCelulaParaSerReanimada(){
 
 
 program {
-	Simular(1)
+	ProcesarTablero()
+-- 	Simular(1)
 	return ( hayHayEscasezDePoblacion() , haySobrePoblacion() , celulaViva() )
 -- return (estaMarcadaParaSerEliminada())
 }
