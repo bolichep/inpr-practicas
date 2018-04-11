@@ -23,13 +23,16 @@ function estaFlotando(){
 	return (numeroSeccion() > numeroPiso())
 }
 
+function hayBolitasColorPiezaAl(dir){
+	-- prec: puede moverse en direccion dir
+	Mover(dir)
+	return (hayBolitas(colorPieza()))
+}
+
 function haySeccionAl(dir){
 	-- prop: denota True si hay session al dir. si no puede mover retorna False
 	-- prec: no tiene
-	if (puedeMover(dir)){
-		Mover(dir)
-	}
-	return (numeroSeccion() > 0 && puedeMover(dir))
+	return (puedeMover(dir) && hayBolitasColorPiezaAl(dir))
 }
 
 function numeroSeccionAl(dir){
@@ -42,9 +45,8 @@ function numeroSeccionAl(dir){
 function continuaPiezaHacia(dir){
 	-- prop: denota True si la pieza continua en direccion dir
 	-- prec: el cabezal esta sobre una pieza flotante
-	return(haySeccionAl(dir) && numeroSeccion() == numeroSeccionAl(dir)) -- ?????
+	return (haySeccionAl(dir) && numeroSeccion() == numeroSeccionAl(dir)) -- ?????
 }
-
 
 function centroDePiezaAl(dir){
 	return (haySeccionAl(dir) && haySeccionAl(opuesto(dir)) && numeroSeccionAl(dir) == numeroSeccionAl(opuesto(dir)) )
@@ -55,6 +57,16 @@ function centradoEnPieza(){
 	-- prec: el cabezal debe estar situado en la seccion de una celda flotante 
 	-- para: no tiene
 	return (centroDePiezaAl(Norte) || centroDePiezaAl(Este))
+}
+
+procedure CentrarEnPieza_(){
+	-- prop: colocar el cabezal en el centro de la pieza
+	-- prec: el cabezal debe estar sobre una seccion de una pieza flotante
+	foreach dir in [minDir()..maxDir()]{
+		if (centroDePiezaAl(dir)) {
+			Mover(dir)
+		}
+	}
 }
 
 procedure CentrarEnPieza(){
@@ -101,38 +113,36 @@ procedure BorrarPieza(){
 	}
 }
 
-
-
 -- TEST
-function test1(){
-	BorrarPieza()
-	return( esHorizontal() )
+
+function horizontalLibre(){
+	-- prec: puede moverse al sur
+	Mover(Sur)
+	return ( not haySeccionAl(Este) && not haySeccionAl(Oeste) )
 }
 
-function test2(){
-	Mover(Este)
-	BorrarPieza()
-	return(esHorizontal())
+function verticalLibre(){
+	return (not haySeccionAl(Sur))
 }
 
-function test3(){
-	IrAlExtremo(Este)
-	BorrarPieza()
-	return(esHorizontal())
-}
-
-function test4(){
-	IrAlExtremo(Norte)
-	Mover(Este)
-	BorrarPieza()
-	return(esHorizontal())
+function puedeBajarPieza(){
+	-- prec: el cabezal se encuentra en una pieza flotante
+  CentrarEnPieza()
+	if (continuaPiezaHacia(Sur)) { Mover(Sur) } 
+	return ( puedeMover(Sur) && (verticalLibre() || (verticalLibre() && horizontalLibre())))
 }
 
 program{
-	BorrarPieza()
-	Mover(Este)
-	BorrarPieza()
-	IrAlExtremo(Norte)
-	BorrarPieza()
-	-- return(test1(), test2(), test3(), test4())
+--	BorrarPieza()
+--	Mover(Este)
+--	BorrarPieza()
+--	IrAlExtremo(Norte)
+--	BorrarPieza()
+	--return(test1(), test2(), test3(), test4())
+	Mover(Este); 
+--Ok  return(haySeccionAl(Norte),haySeccionAl(Este),haySeccionAl(Sur),haySeccionAl(Oeste))
+  -- return(continuaPiezaHacia(Norte),continuaPiezaHacia(Este),continuaPiezaHacia(Sur),continuaPiezaHacia(Oeste))
+--  return(numeroSeccionAl(Norte),numeroSeccionAl(Este),numeroSeccionAl(Sur),numeroSeccionAl(Oeste))
+  CentrarEnPieza()
+	return(puedeBajarPieza())
 }

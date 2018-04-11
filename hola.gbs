@@ -95,12 +95,15 @@ program
 	/* Proposito: Escribir HOLA con bolitas (puntos)
 	precondicion: el cabezal en la celda N.O. de un rectangulo de tres celdas 
 	altura y quince celdas de ancho */
-	DibujarLetraHache()
+	/*
+  DibujarLetraHache()
 	IrProximaLetra()
 	DibujarLetraO()
 	IrProximaLetra()
 	DibujarLetraEle()
 	IrProximaLetra()
 	DibujarLetraA()
+	*/
+	return (45 div 8)
 	}
 
