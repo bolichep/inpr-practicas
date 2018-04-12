@@ -188,7 +188,7 @@ procedure MoverT(d1, d2){
 }
 
 
-procedure IrAlInicioDelTablero( direccionPrimaria, direccionSecundaria) {
+procedure InicializarTablero( direccionPrimaria, direccionSecundaria) {
 	IrAlInicioT(direccionPrimaria, direccionSecundaria)
 }
 procedure hayProximaCelda(direccionPrimaria, direccionSecundaria){
