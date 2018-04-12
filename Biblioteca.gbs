@@ -186,6 +186,18 @@ procedure MoverT(d1, d2){
 		Mover(d2)
 	}
 }
+
+
+procedure IrAlInicioDelTablero( direccionPrimaria, direccionSecundaria) {
+	IrAlInicioT(direccionPrimaria, direccionSecundaria)
+}
+procedure hayProximaCelda(direccionPrimaria, direccionSecundaria){
+	puedeMoverT(direccionPrimaria, direccionSecundaria)
+}
+procedure IrAproximaCelda(direccionPrimaria, direccionSecundaria){
+	MoverT(direccionPrimaria, direccionSecundaria)
+}
+
 /* retorna el valor en valueTrue si se cumple la condicion bool como verdadra, en caso contrario devuelve el valor en valueFalse */
 function ifElse(bool, valueTrue, valueFalse){
 	value := valueFalse
