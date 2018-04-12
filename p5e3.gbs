@@ -28,6 +28,16 @@ procedure MoverT(d1, d2){
 	}
 }
 
+procedure IrAlInicioDelTablero( direccionPrimaria, direccionSecundaria) {
+	IrAlInicioT(direccionPrimaria, direccionSecundaria)
+}
+procedure hayProximaCelda(direccionPrimaria, direccionSecundaria){
+	puedeMoverT(direccionPrimaria, direccionSecundaria)
+}
+procedure IrAproximaCelda(direccionPrimaria, direccionSecundaria){
+	MoverT(direccionPrimaria, direccionSecundaria)
+}
+
 procedure PintarTablero(c){
 	IrAlInicioT(Este, Norte)
 	while (puedeMoverT(Este, Norte)){
